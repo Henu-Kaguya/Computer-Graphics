@@ -1,0 +1,59 @@
+#include <GL/glut.h>
+
+void Display(void)
+{
+  glClear(GL_COLOR_BUFFER_BIT);
+  glColor3f(1,1,1);
+
+  glBegin(GL_QUADS);
+	//QUAD1
+	glVertex2f(0,0);
+	glVertex2f(-0.1,0.3);
+	glVertex2f(0, 0.5);
+	glVertex2f(0.10, 0.3);
+
+	//QUAD2
+	glVertex2f(0,0);
+	glVertex2f(0.10,0.3);
+	glVertex2f(0.4, 0.3);
+	glVertex2f(0.25, 0.0);
+
+	//QUAD3
+	glVertex2f(0,0);
+	glVertex2f(0.25,0);
+	glVertex2f(0.4, -0.3);
+	glVertex2f(0.10, -0.3);
+
+	//QUAD4
+	glVertex2f(0,0);
+	glVertex2f(0.1,-0.3);
+	glVertex2f(0, -0.5);
+	glVertex2f(-0.10, -0.3);
+
+	//QUAD5
+	glVertex2f(0,0);
+	glVertex2f(-0.1,-0.3);
+	glVertex2f(-0.4, -0.3);
+	glVertex2f(-0.25,0);
+
+	//QUAD6
+	glVertex2f(0,0);
+	glVertex2f(-0.25,0);
+	glVertex2f(-0.4, 0.3);
+	glVertex2f(-0.10,0.3);
+  glEnd(); // GL_POLYGON
+
+  glutSwapBuffers();
+}
+
+int main (int argc, char *argv[])
+{
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
+    glutInitWindowPosition(100, 100);
+    glutInitWindowSize(400, 400);
+    glutCreateWindow("Simple GLUT App");
+    glutDisplayFunc(Display);
+    glutMainLoop();
+    return 0;
+}

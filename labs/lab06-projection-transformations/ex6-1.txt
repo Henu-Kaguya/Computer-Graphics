@@ -1,0 +1,158 @@
+#include <GL/glut.h>
+#include <stdlib.h>
+
+enum {FILL, WIRE};
+/* geometry display list names */
+enum {SPHERE = 1, CONE, WALLS};
+int rendermode = FILL;
+GLUquadricObj *sphere, *cone, *base;
+/* material properties for objects in scene */
+static GLfloat lightpos[] = {50.f, 50.f, -320.f, 1.f};
+static GLfloat wall_mat[] = {0.8f, 0.8f, 0.8f, 1.f};
+static GLfloat sphere_mat[] = {1.0f, 0.2f, 0.2f, 1.f};
+static GLfloat cone_mat[] = {0.2f, 1.0f, 0.2f, 1.f};
+
+/* use display lists to represent objects */
+void Initial(void) 
+{
+	glMatrixMode(GL_PROJECTION);
+    glFrustum(-100.0, 100.0, -100.0, 100.0, 320.0, 640.0); 
+    glMatrixMode(GL_MODELVIEW);
+	/* turn on features */
+    glEnable(GL_DEPTH_TEST);  // 打开深度缓冲测试
+	glDepthFunc(GL_LEQUAL);   // 判断遮挡关系时，离视点近的物体遮挡离视点远的物体
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+    /* place light 0 in the right place */
+    glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
+
+	glNewList(SPHERE, GL_COMPILE);
+    /* make display lists for sphere and cone; for efficiency */
+		sphere = gluNewQuadric();
+		glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, sphere_mat);
+		gluSphere(sphere, 50.f, 40, 40);
+		gluDeleteQuadric(sphere);
+    glEndList();
+	
+	glNewList(CONE, GL_COMPILE);
+		cone = gluNewQuadric();
+		base = gluNewQuadric();
+		glPushMatrix();
+		glRotatef(-90.f, 1.f, 0.f, 0.f);
+		glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, cone_mat);
+		gluQuadricOrientation(base, GLU_INSIDE);
+		gluDisk(base, 0., 40., 20, 1);
+		gluCylinder(cone, 40., 0., 120., 20, 20);
+		glPopMatrix();
+		gluDeleteQuadric(cone);
+		gluDeleteQuadric(base);
+    glEndList();
+
+	/* make display lists for walls and floor */
+    glNewList(WALLS, GL_COMPILE);
+		glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, wall_mat);
+		
+		/* floor */
+		glBegin(GL_QUADS);
+			glNormal3f(0.f, 1.f, 0.f);
+			glVertex3f(-100.f, -100.f, -320.f);
+			glVertex3f( 100.f, -100.f, -320.f);
+			glVertex3f( 100.f, -100.f, -520.f);
+			glVertex3f(-100.f, -100.f, -520.f);
+
+			/* left wall */
+			glNormal3f(1.f, 0.f, 0.f);
+			glVertex3f(-100.f, -100.f, -320.f);
+			glVertex3f(-100.f, -100.f, -520.f);
+			glVertex3f(-100.f,  100.f, -520.f);
+			glVertex3f(-100.f,  100.f, -320.f);
+
+			/* right wall */
+			glNormal3f(-1.f, 0.f, 0.f);
+			glVertex3f( 100.f, -100.f, -320.f);
+			glVertex3f( 100.f,  100.f, -320.f);
+			glVertex3f( 100.f,  100.f, -520.f);
+			glVertex3f( 100.f, -100.f, -520.f);
+
+			/* ceiling */
+			glNormal3f(0.f, -1.f, 0.f);
+			glVertex3f(-100.f,  100.f, -320.f);
+			glVertex3f(-100.f,  100.f, -520.f);
+			glVertex3f( 100.f,  100.f, -520.f);
+			glVertex3f( 100.f,  100.f, -320.f);
+
+			/* back wall */
+			glNormal3f(0.f, 0.f, 1.f);
+			glVertex3f(-100.f, -100.f, -520.f);
+			glVertex3f( 100.f, -100.f, -520.f);
+			glVertex3f( 100.f,  100.f, -520.f);
+			glVertex3f(-100.f,  100.f, -520.f);
+		glEnd(); 
+	glEndList();
+}
+
+/* do hidden line removal on an object in the scene */
+void  drawscene(void)
+{
+    glCallList(WALLS);
+
+    glPushMatrix();
+    glTranslatef(-20.f, -40.f, -400.f);
+    glCallList(SPHERE);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(40.f, -100.f, -420.f);
+    glCallList(CONE);
+    glPopMatrix();
+}
+
+/* Called when window needs to be redrawn */
+void Display(void)
+{
+	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+	 /* draw a perspective scene */
+	switch(rendermode) 
+	{
+	  case FILL:  /* hidden surface mode*/
+		drawscene();
+		break;
+  
+	  case WIRE: /* basic wireframe mode */
+		glDisable(GL_LIGHTING);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glColor4f(0.0, 0.0, 0.0, 1.0);
+		drawscene();
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glEnable(GL_LIGHTING);
+		break;
+	}
+	glFlush();
+}
+
+void menu(int selection)
+{
+	rendermode = selection;
+	glutPostRedisplay();
+}
+
+int main(int argc, char *argv[])
+{
+    glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_SINGLE|GLUT_RGBA|GLUT_DEPTH);
+	glutInitWindowPosition(100,100); 
+    glutInitWindowSize(500, 500);
+    glutCreateWindow("Wireframe and ZBuffer");
+    glutDisplayFunc(Display);
+
+    glutCreateMenu(menu);
+    glutAddMenuEntry("Solid Fill", FILL);
+    glutAddMenuEntry("Wireframe", WIRE);
+    glutAttachMenu(GLUT_RIGHT_BUTTON);
+	
+	Initial(); 
+    glutMainLoop();
+    return 0;
+}

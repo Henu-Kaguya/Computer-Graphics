@@ -1,0 +1,417 @@
+
+#include <windows.h>
+#include <gl/glut.h>
+#include <iostream>
+using namespace std;
+
+int m_pointnumber = 0; //动画时绘制点的数目
+int m_drawmode = 1;    //绘制模式   1    DDA算法画直线
+                       //           2    中点Bresenham算法画直线
+                       //           3    改进Bresenham算法画直线
+                       //           4    八分法绘制圆
+                       //           5    四分法绘制椭圆(选作)
+
+//绘制坐标线
+void DrawCordinateLine(void)
+{
+	int i = 0 ;
+	//坐标线为黑色
+	glColor3f(0.0f, 0.0f ,0.0f);
+	glBegin(GL_LINES);
+	for (i=10;i<=250;i=i+10)
+	{
+		glVertex2f((float)(i), 0.0f);
+		glVertex2f((float)(i), 250.0f);
+		glVertex2f(0.0f, (float)(i));
+		glVertex2f(250.0f, (float)(i));
+	}
+	glEnd();
+}
+
+//绘制一个点，这里用一个正方形表示一个点。
+void PutPixel(GLsizei x, GLsizei y)
+{
+	glRectf(10*x,10*y,10*x+10,10*y+10);
+}
+
+///////////////////////////////////////////////////////////////////
+//dda画线算法                                                    //
+//参数说明：x0,y0  起点坐标                                      //  
+//          x1,y1  终点坐标                                      // 
+//          num    扫描转换时从起点开始输出的点的数目，用于动画  //
+//          w      线段的宽度                                    //
+/////////////////////////////////////////////////////////////////// 
+void DDAcreateLine(GLsizei x0, GLsizei y0, GLsizei x1, GLsizei y1, GLsizei num, GLsizei w)
+{
+	//设置颜色
+	glColor3f(1.0f,0.0f,0.0f);
+	
+	//对画线动画进行控制
+	if(num == 1)
+		cout<<"DDA画线算法：各点坐标\n";
+	else if(num==0)
+		return;
+	
+	//算法的实现
+	GLsizei dx,dy,epsl,k;
+	GLfloat x,y,xincre,yincre;
+	
+	dx = x1-x0;
+	dy = y1-y0;
+	x = x0;
+	y = y0;
+	
+	if(abs(dx) > abs(dy)) epsl = abs(dx);
+	else epsl = abs(dy);
+	xincre = (float)dx / epsl ;
+	yincre = (float)dy / epsl ;
+	
+	for(k = 0; k<=epsl; k++)
+	{
+		PutPixel((int)(x+0.5), (int)(y+0.5));
+		//画具有宽度的线段，使用垂直线刷子
+		if(w%2==0)
+		{
+			for(int i=1;i<=w/2;i++)
+			{
+				PutPixel((int)(x+0.5), (int)(y+0.5)+i);
+				PutPixel((int)(x+0.5), (int)(y+0.5)-(i-1));
+			}
+		}
+		else
+			for(int i=1;i<=w/2;i++)
+			{
+				PutPixel((int)(x+0.5), (int)(y+0.5)+i);
+				PutPixel((int)(x+0.5), (int)(y+0.5)-i);
+			}
+
+		if (k>=num-1) 
+		{
+			cout<<"x="<<x<<",y="<<y
+				<<";取整后"<<"x="<<(int)(x+0.5)
+				<<",y="<<(int)(y+0.5)<<endl;
+			break;
+		}
+		x += xincre;
+		y += yincre;
+		
+		if(x >= 25 || y >= 25) break;
+	}
+}
+
+///////////////////////////////////////////////////////////////////
+//中点算法画直线(0<=k<=1)                               //
+//参数说明：x0,y0  起点坐标                                      //  
+//          x1,y1  终点坐标                                      // 
+//          num    扫描转换时从起点开始输出的点的数目，用于动画  //
+/////////////////////////////////////////////////////////////////// 
+void BresenhamLine(GLsizei x0, GLsizei y0, GLsizei x1, GLsizei y1, GLsizei 
+
+num)
+{
+	glColor3f(1.0f,0.0f,0.0f);
+	
+	if(num == 1)
+		cout<<"中点算法画直线：各点坐标及判别式的值\n";
+	else if(num==0)
+		return;
+
+	//算法的实现
+	GLsizei dx,dy,d;
+	GLsizei UpIncre,DownIncre;
+	GLsizei x,y,k;
+	if(x0>x1)
+	{
+		x=x1; x1=x0; x0=x;
+		y=y1; y1=y0; y0=y;
+	}
+	dx = x1-x0;
+	dy = y1-y0;
+	x = x0;
+	y = y0;
+	d=dx-2*dy;
+	UpIncre=2*dx-2*dy;
+	DownIncre=-2*dy;
+	k=0;
+	while(x<=x1)
+	{
+		PutPixel(x,y);
+		if (k>=num-1) 
+		{
+			cout<<"x="<<x<<",y="<<y<<endl;
+			break;
+		}
+		k++;
+		x++;
+		if(d<0)
+		{
+			y++;
+			d+=UpIncre;
+		}
+		else
+			d+=DownIncre;
+		if(x >= 25 || y >= 25) break;
+	}
+	
+}
+///////////////////////////////////////////////////////////////////
+//Bresenham算法画直线(0<=k<=1)                             //
+//参数说明：x0,y0  起点坐标                                      //  
+//          x1,y1  终点坐标                                      // 
+//          num    扫描转换时从起点开始输出的点的数目，用于动画  //
+/////////////////////////////////////////////////////////////////// 
+void Bresenham2Line(GLsizei x0, GLsizei y0, GLsizei x1, GLsizei y1, GLsizei 
+
+num)
+{
+	glColor3f(1.0f,0.0f,0.0f);
+	
+	if(num == 1)
+		cout<<"Bresenham算法画直线：各点坐标及判别式的值\n";
+	else if(num==0)
+		return;
+
+	//算法的实现
+	GLsizei x,y,dx,dy;
+	GLsizei e,k;
+	
+	dx = x1-x0;
+	dy = y1-y0;
+	e=-dx;
+	x=x0;y=y0;
+	k=0;
+	while(x<=x1)
+	{
+		PutPixel(x,y);
+		if (k>=num-1) 
+		{
+			cout<<"x="<<x<<",y="<<y<<",e="<<e<<endl;
+			break;
+		}
+		k++;
+		x++;
+		e+=2*dy;
+		if(e>0)
+		{
+			y++;
+			e-=2*dx;
+		}
+		if(x >= 25 || y >= 25) break;
+	}
+}
+
+///////////////////////////////////////////////////////////////////
+//Bresenham算法画圆                                              //
+//参数说明：x,y    圆心坐标                                      //  
+//          r      圆半径                                        // 
+//          num    扫描转换时从起点开始输出的点的数目，用于动画  //
+/////////////////////////////////////////////////////////////////// 
+void BresenhamCircle(GLsizei x1, GLsizei y1, GLsizei r, GLsizei num)
+{
+	glColor3f(1.0f,0.0f,0.0f);
+	
+	if(num == 1)
+		cout<<"Bresenham算法画圆：各点坐标及判别式的值\n";
+
+	//算法的实现
+	GLsizei x,y,d,k;
+	x=0;
+	y=r;
+	d=1-r;
+	k=0;
+	while(y>x) //y>x即第一象限的第2区八分圆
+	{
+		PutPixel(x+x1,y+y1); //圆心(x1,y1),画点时直接相加平移,画2区
+        PutPixel(y+x1,x+y1); //画1区
+        PutPixel(-x+x1,y+y1); //画3区
+        PutPixel(-y+x1,x+y1); //画4区
+        PutPixel(-x+x1,-y+y1); //画5区
+        PutPixel(-y+x1,-x+y1); //画6区
+        PutPixel(x+x1,-y+y1); //画7区
+        PutPixel(y+x1,-x+y1); //画8区
+		if (k>=num-1) 
+		{
+			cout<<"x="<<x<<",y="<<y<<endl;
+			break;
+		}
+        if(d<0)
+			d+=2*x+3; //d的变化
+		else
+		{
+			d+=2*(x-y)+5; //d<=0时,d的变化
+			y--; //y坐标减1
+		}
+		x++; //x坐标加1
+		k++;
+		if(x >= 25 || y >= 25) break;
+	}
+}
+
+///////////////////////////////////////////////////////////////////
+//中点Bresenham算法画椭圆                                        //
+//参数说明：x1,y1    圆心坐标                                    //  
+//          a,b      长半轴为a,短半轴为b                         // 
+//          num    扫描转换时从起点开始输出的点的数目，用于动画  //
+/////////////////////////////////////////////////////////////////// 
+void MidBresenhamEllipse(GLsizei x1, GLsizei y1, GLsizei a, GLsizei b, GLsizei num)
+{
+	glColor3f(1.0f,0.0f,0.0f);
+	
+	if(num == 1)
+		cout<<"中点Bresenham算法画椭圆：各点坐标及判别式的值\n";
+
+	//算法的实现
+
+
+	GLsizei x,y,k;
+	GLfloat d1,d2;
+	x=0; y=b;
+	k=0;
+	d1=b*b+a*a*(-b+0.25);
+
+	PutPixel(x1+x,y1+y); PutPixel(x1+x,y1-y);
+	PutPixel(x1-x,y1+y); PutPixel(x1-x,y1-y);
+
+	while(b*b*(x+1)<a*a*(y-0.5))
+	{
+		if(d1<0)
+		{
+			d1+=b*b*(2*x+3);	
+		}
+		else
+		{
+			d1+=b*b*(2*x+3)+a*a*(-2*y+2);
+			y--;
+		}
+		x++;
+		PutPixel(x1+x,y1+y); PutPixel(x1+x,y1-y);
+		PutPixel(x1-x,y1+y); PutPixel(x1-x,y1-y);
+		if (k>=num-1) 
+		{
+			cout<<"x="<<x<<",y="<<y<<endl;
+			break;
+		}
+		k++;
+	}
+
+	d2=b*b*(x+0.5)*(x+0.5)+a*a*(y-1)*(y-1)-a*a*b*b;
+	while(y>0)
+	{
+		if(d2<=0)
+		{
+			d2+=b*b*(2*x+2)+a*a*(-2*y+3);
+			x++;
+		}
+		else
+		{
+			d2+=a*a*(-2*y+3);
+		}
+		y--;
+		PutPixel(x1+x,y1+y); PutPixel(x1+x,y1-y);
+		PutPixel(x1-x,y1+y); PutPixel(x1-x,y1-y);
+		if (k>=num-1) 
+		{
+			cout<<"x="<<x<<",y="<<y<<endl;
+			break;
+		}
+		k++;
+	}
+}
+
+//初始化窗口
+void Initial(void)
+{
+	// 设置窗口颜色为白色
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+}
+
+// 窗口大小改变时调用的登记函数
+void ChangeSize(GLsizei w, GLsizei h)
+{
+	if(h == 0)
+		h = 1;
+	// 设置视区尺寸
+	glViewport(0, 0, w, h);
+	
+	// 重置坐标系统
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	
+	//建立修剪空间的范围
+	if (w <= h) 
+		glOrtho(0.0f, 250.0f, 0.0f, 250.0f*h/w, 1.0, -1.0);
+	else
+		glOrtho(0.0f, 250.0f*w/h, 0.0f, 250.0f, 1.0, -1.0);
+}
+
+// 在窗口中绘制图形
+void Redraw(void)
+{
+	//用当前背景色填充窗口
+	glClear(GL_COLOR_BUFFER_BIT);
+	
+	//画出坐标线
+	DrawCordinateLine();
+	
+	switch(m_drawmode)
+	{
+	case 1:
+		DDAcreateLine(0,0,20,15,m_pointnumber,3);break;
+	case 2:
+		BresenhamLine(0,0,20,15,m_pointnumber);break;
+	case 3:
+		Bresenham2Line(0,0,5,2,m_pointnumber);break;
+	case 4:
+		BresenhamCircle(12,12,10,m_pointnumber);break;
+	case 5:
+		MidBresenhamEllipse(12,12,10,6,m_pointnumber);break;
+	default:
+		break;
+	}
+	glutSwapBuffers();
+}
+
+//设置时间回调函数
+void TimerFunc(int value)
+{
+	if(m_pointnumber == 0)
+		value = 1;
+	m_pointnumber = value;
+	glutPostRedisplay();
+	glutTimerFunc(500, TimerFunc, value+1);
+}
+
+//设置键盘回调函数
+void Keyboard(unsigned char key, int x, int y)   
+{
+	if (key == '1')		m_drawmode = 1;
+	if (key == '2')		m_drawmode = 2;
+	if (key == '3')		m_drawmode = 3;
+	if (key == '4')		m_drawmode = 4;
+	if (key == '5')		m_drawmode = 5;
+	
+	m_pointnumber = 0;
+	glutPostRedisplay();
+}
+
+//void main(void)
+int main(int argc, char* argv[])
+{
+	glutInit(&argc, argv);
+	
+	//初始化glut库opengl窗口的显示模式
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB); 
+	glutInitWindowSize(600,600);
+	glutInitWindowPosition(100,100);
+	
+	glutCreateWindow("基本图元绘制程序"); 
+	glutDisplayFunc(Redraw); 
+	glutReshapeFunc(ChangeSize); 
+	glutKeyboardFunc(Keyboard);//键盘响应回调函数
+	glutTimerFunc(500, TimerFunc, 1);    
+	
+	//窗口初始化
+	Initial();
+	glutMainLoop(); //启动主glut事件处理循环
+ return 0;
+}
