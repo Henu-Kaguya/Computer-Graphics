@@ -14,6 +14,8 @@
 ### 20260701
 
 - [计算机图形学_4小时期末速成课](https://www.bilibili.com/video/BV1RR6EYJEsQ)
+  - 看一半看困了,没看完,基本都是跳过的
+- 看老师上课的雨课堂ppt
 
 
 ## 开源协议 / License
