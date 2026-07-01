@@ -8,6 +8,14 @@
 - exercises/: 习题 (包括雨课堂测试题)
 - exams/: 考试复习与真题
 
+
+## timeline @Sonder9999
+
+### 20260701
+
+- [计算机图形学_4小时期末速成课](https://www.bilibili.com/video/BV1RR6EYJEsQ)
+
+
 ## 开源协议 / License
 
 本项目采用 [CC BY-NC-SA 4.0 (署名-非商业性使用-相同方式共享)](LICENSE) 许可协议。
