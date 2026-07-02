@@ -1022,12 +1022,72 @@
 
 ---
 
-## 二、 基本变换矩阵 (2D 与 3D)
+## 二、 几何变换通式及其分块含义
+
+引入齐次坐标后，图形的几何变换可以表示为矩阵乘法。下面分别给出二维与三维几何变换矩阵的通式及其物理含义：
+
+### 1. 二维齐次变换通式 ($3 \times 3$ 矩阵)
+
+$$
+T_{3 \times 3} = \begin{bmatrix}
+a & b & p_x \\
+c & d & p_y \\
+l & m & s
+\end{bmatrix} = \left[ \begin{array}{cc|c}
+a & b & p_x \\
+c & d & p_y \\
+\hline
+l & m & s
+\end{array} \right]
+$$
+
+- **左上角 $2 \times 2$ 矩阵 $\begin{bmatrix} a & b \\ c & d \end{bmatrix}$（线性变换项）**：
+  - 控制二维空间中的**旋转、缩放、反射对称和错切**。
+  - 对角线上的 $a, d$ 分别表示 $X, Y$ 方向的缩放比例；非对角线上的 $b, c$ 控制错切与旋转。
+- **右上角 $2 \times 1$ 向量 $\begin{bmatrix} p_x \\ p_y \end{bmatrix}$（平移变换项）**：
+  - 控制图形沿 $X, Y$ 方向的**平移量**（在坐标 $w=1$ 下，平移分量直接累加）。
+- **左下角 $1 \times 2$ 向量 $\begin{bmatrix} l & m \end{bmatrix}$（透视投影项）**：
+  - 控制二维空间中的**透视投影变换**，使平行线在投影后产生交点（灭点）。
+- **右下角 $1 \times 1$ 标量 $[s]$（全局比例因子）**：
+  - 控制图形的**全局统一等比例缩放**。在进行齐次坐标归一化时，所有坐标都将除以 $s$，从而使物体尺寸变为原来的 $\frac{1}{s}$。
+
+---
+
+### 2. 三维齐次变换通式 ($4 \times 4$ 矩阵)
+
+$$
+T_{4 \times 4} = \begin{bmatrix}
+a & b & c & p_x \\
+d & e & f & p_y \\
+g & h & i & p_z \\
+l & m & n & s
+\end{bmatrix} = \left[ \begin{array}{ccc|c}
+a & b & c & p_x \\
+d & e & f & p_y \\
+g & h & i & p_z \\
+\hline
+l & m & n & s
+\end{array} \right]
+$$
+
+- **左上角 $3 \times 3$ 矩阵（线性变换项）**：
+  - 控制三维空间中的**旋转、缩放、反射对称和错切**。
+  - 对角线上的 $a, e, i$ 对 $X, Y, Z$ 方向分别进行缩放；若该子矩阵为正交矩阵且行列式为 1，则代表纯旋转。
+- **右上角 $3 \times 1$ 向量 $\begin{bmatrix} p_x \\ p_y \\ p_z \end{bmatrix}$（平移变换项）**：
+  - 控制图形沿 $X, Y, Z$ 三个方向的**空间平移距离**。
+- **左下角 $1 \times 3$ 向量 $\begin{bmatrix} l & m & n \end{bmatrix}$（透视投影项）**：
+  - 控制沿各主轴方向进行**透视投影变换**时，空间物体发生的形状透视形变。
+- **右下角 $1 \times 1$ 标量 $[s]$（全局比例因子）**：
+  - 控制三维物体的**整体全局等比放缩**，在进行坐标归一化除以 $s$ 时，体积将缩小为原来的 $\frac{1}{s^3}$。
+
+---
+
+## 三、 基本变换矩阵 (2D 与 3D 矩阵全集)
 
 ### 1. 二维基本齐次变换矩阵 ($3 \times 3$)
 
 * **平移变换 (Translation)**：
-
+  
   $$
   T(t_x, t_y) = \begin{bmatrix}
   1 & 0 & t_x \\
@@ -1035,8 +1095,9 @@
   0 & 0 & 1
   \end{bmatrix}
   $$
+  
 * **比例缩放 (Scaling)**：
-
+  
   $$
   S(s_x, s_y) = \begin{bmatrix}
   s_x & 0 & 0 \\
@@ -1044,8 +1105,9 @@
   0 & 0 & 1
   \end{bmatrix}
   $$
+  
 * **旋转变换 (Rotation，绕原点逆时针旋转角度 $\theta$)**：
-
+  
   $$
   R(\theta) = \begin{bmatrix}
   \cos\theta & -\sin\theta & 0 \\
@@ -1053,31 +1115,86 @@
   0 & 0 & 1
   \end{bmatrix}
   $$
-* **对称反射 (Reflection，以关于 x 轴对称镜像为例)**：
-
-  $$
-  M_x = \begin{bmatrix}
-  1 & 0 & 0 \\
-  0 & -1 & 0 \\
-  0 & 0 & 1
-  \end{bmatrix}
-  $$
-* **错切变换 (Shear，以沿 x 方向错切为例)**：
-
-  $$
-  SH_x(sh_x) = \begin{bmatrix}
-  1 & sh_x & 0 \\
-  0 & 1 & 0 \\
-  0 & 0 & 1
-  \end{bmatrix}
-  $$
+  
+* **对称反射变换 (Reflection)**：
+  - **关于 $X$ 轴反射**：
+    
+    $$
+    M_x = \begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & -1 & 0 \\
+    0 & 0 & 1
+    \end{bmatrix}
+    $$
+    
+  - **关于 $Y$ 轴反射**：
+    
+    $$
+    M_y = \begin{bmatrix}
+    -1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1
+    \end{bmatrix}
+    $$
+    
+  - **关于原点对称反射**：
+    
+    $$
+    M_{\text{origin}} = \begin{bmatrix}
+    -1 & 0 & 0 \\
+    0 & -1 & 0 \\
+    0 & 0 & 1
+    \end{bmatrix}
+    $$
+    
+  - **关于直线 $y=x$ 反射**：
+    
+    $$
+    M_{y=x} = \begin{bmatrix}
+    0 & 1 & 0 \\
+    1 & 0 & 0 \\
+    0 & 0 & 1
+    \end{bmatrix}
+    $$
+    
+  - **关于直线 $y=-x$ 反射**：
+    
+    $$
+    M_{y=-x} = \begin{bmatrix}
+    0 & -1 & 0 \\
+    -1 & 0 & 0 \\
+    0 & 0 & 1
+    \end{bmatrix}
+    $$
+    
+* **错切变换 (Shear)**：
+  - **沿 $X$ 方向错切**：
+    
+    $$
+    SH_x(sh_x) = \begin{bmatrix}
+    1 & sh_x & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1
+    \end{bmatrix}
+    $$
+    
+  - **沿 $Y$ 方向错切**：
+    
+    $$
+    SH_y(sh_y) = \begin{bmatrix}
+    1 & 0 & 0 \\
+    sh_y & 1 & 0 \\
+    0 & 0 & 1
+    \end{bmatrix}
+    $$
+    
 
 ---
 
 ### 2. 三维基本齐次变换矩阵 ($4 \times 4$)
 
 * **平移变换**：
-
+  
   $$
   T(t_x, t_y, t_z) = \begin{bmatrix}
   1 & 0 & 0 & t_x \\
@@ -1086,10 +1203,21 @@
   0 & 0 & 0 & 1
   \end{bmatrix}
   $$
-* **绕三个坐标轴的旋转矩阵**：
-
+  
+* **比例缩放**：
+  
+  $$
+  S(s_x, s_y, s_z) = \begin{bmatrix}
+  s_x & 0 & 0 & 0 \\
+  0 & s_y & 0 & 0 \\
+  0 & 0 & s_z & 0 \\
+  0 & 0 & 0 & 1
+  \end{bmatrix}
+  $$
+  
+* **绕三个主坐标轴的旋转矩阵**：
   - **绕 Z 轴旋转 $\theta$**：
-
+    
     $$
     R_z(\theta) = \begin{bmatrix}
     \cos\theta & -\sin\theta & 0 & 0 \\
@@ -1098,8 +1226,9 @@
     0 & 0 & 0 & 1
     \end{bmatrix}
     $$
+    
   - **绕 X 轴旋转 $\theta$**：
-
+    
     $$
     R_x(\theta) = \begin{bmatrix}
     1 & 0 & 0 & 0 \\
@@ -1108,8 +1237,9 @@
     0 & 0 & 0 & 1
     \end{bmatrix}
     $$
+    
   - **绕 Y 轴旋转 $\theta$**：
-
+    
     $$
     R_y(\theta) = \begin{bmatrix}
     \cos\theta & 0 & \sin\theta & 0 \\
@@ -1118,10 +1248,56 @@
     0 & 0 & 0 & 1
     \end{bmatrix}
     $$
+    
+* **对称反射变换 (Reflection)**：
+  - **关于 $XY$ 平面反射 ($z \to -z$)**：
+    
+    $$
+    M_{xy} = \begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & -1 & 0 \\
+    0 & 0 & 0 & 1
+    \end{bmatrix}
+    $$
+    
+  - **关于 $YZ$ 平面反射 ($x \to -x$)**：
+    
+    $$
+    M_{yz} = \begin{bmatrix}
+    -1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+    \end{bmatrix}
+    $$
+    
+  - **关于 $ZX$ 平面反射 ($y \to -y$)**：
+    
+    $$
+    M_{zx} = \begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & -1 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+    \end{bmatrix}
+    $$
+    
+* **错切变换 (Shear，以沿 Z 轴错切为例)**：
+  - 错切量由 $Z$ 坐标的大小决定，使 $X, Y$ 坐标发生线性错切偏移：
+    
+    $$
+    SH_z(sh_x, sh_y) = \begin{bmatrix}
+    1 & 0 & sh_x & 0 \\
+    0 & 1 & sh_y & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+    \end{bmatrix}
+    $$
 
 ---
 
-## 三、 复合变换 (Composite Transformations)
+## 四、 复合变换 (Composite Transformations)
 
 * **乘法顺序非交换性**：由于矩阵乘法不满足交换律（即 $A \cdot B \neq B \cdot A$），多个变换连续作用时，矩阵连乘的顺序至关重要。
 * **典型推导：关于任意点 $(x_f, y_f)$ 的旋转**：
@@ -1149,7 +1325,7 @@
 
 ---
 
-## 四、 全局固定坐标模式与活动局部坐标模式 (必考综合计算理论)
+## 五、 全局固定坐标模式与活动局部坐标模式 (必考综合计算理论)
 
 * **全局固定坐标模式 (Global Coordinate Mode / Left Multi-multiplication)**：
   - **视点**：所有的空间变换（平移、旋转、缩放）都是相对于绝对的、静止的“世界坐标系”进行。
@@ -1179,7 +1355,7 @@
 
 ---
 
-## 五、 OpenGL 中的三类变换应用函数
+## 六、 OpenGL 中的三类变换应用函数
 
 * `glTranslatef(tx, ty, tz)`：平移当前矩阵。
 * `glRotatef(angle, x, y, z)`：让物体绕指定方向向量 $(x, y, z)$ 旋转给定的角度 `angle`。
