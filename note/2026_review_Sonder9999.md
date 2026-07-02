@@ -848,6 +848,82 @@
 >   (0,5) \to (1,5) \to (2,5) \to (3,4)
 >   $$
 >
+>   <div align="center">
+>   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%" style="background-color: #ffffff; max-width: 600px; display: block; margin: auto;">
+>     <defs>
+>       <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+>         <path d="M 0 0 L 10 5 L 0 10 z" fill="#333333" />
+>       </marker>
+>     </defs>
+>     <text x="400" y="40" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #111111; text-anchor: middle;">中点画圆法 1/8圆弧绘制实例 (R = 5)</text>
+>     <line x1="230" y1="80" x2="230" y2="480" style="stroke: #e0e0e0; stroke-width: 1;" />
+>     <line x1="310" y1="80" x2="310" y2="480" style="stroke: #e0e0e0; stroke-width: 1;" />
+>     <line x1="390" y1="80" x2="390" y2="480" style="stroke: #e0e0e0; stroke-width: 1;" />
+>     <line x1="470" y1="80" x2="470" y2="480" style="stroke: #e0e0e0; stroke-width: 1;" />
+>     <line x1="550" y1="80" x2="550" y2="480" style="stroke: #e0e0e0; stroke-width: 1;" />
+>     <line x1="630" y1="80" x2="630" y2="480" style="stroke: #e0e0e0; stroke-width: 1;" />
+>     <line x1="150" y1="400" x2="630" y2="400" style="stroke: #e0e0e0; stroke-width: 1;" />
+>     <line x1="150" y1="320" x2="630" y2="320" style="stroke: #e0e0e0; stroke-width: 1;" />
+>     <line x1="150" y1="240" x2="630" y2="240" style="stroke: #e0e0e0; stroke-width: 1;" />
+>     <line x1="150" y1="160" x2="630" y2="160" style="stroke: #e0e0e0; stroke-width: 1;" />
+>     <line x1="150" y1="80" x2="630" y2="80" style="stroke: #e0e0e0; stroke-width: 1;" />
+>     <path d="M 150 80 A 400 400 0 0 1 470 240" style="stroke: #ff9900; stroke-width: 3.5; stroke-dasharray: 6,4; fill: none;" />
+>     <rect x="110" y="40" width="80" height="80" style="fill: #4caf50; fill-opacity: 0.22; stroke: #4caf50; stroke-width: 1;" />
+>     <rect x="190" y="40" width="80" height="80" style="fill: #4caf50; fill-opacity: 0.22; stroke: #4caf50; stroke-width: 1;" />
+>     <rect x="270" y="40" width="80" height="80" style="fill: #4caf50; fill-opacity: 0.22; stroke: #4caf50; stroke-width: 1;" />
+>     <rect x="350" y="120" width="80" height="80" style="fill: #4caf50; fill-opacity: 0.22; stroke: #4caf50; stroke-width: 1;" />
+>     <rect x="430" y="200" width="80" height="80" style="fill: none; stroke: #888888; stroke-width: 1; stroke-dasharray: 4,4;" />
+>     <circle cx="150" cy="80" r="6" style="fill: #2e7d32; stroke: #ffffff; stroke-width: 2;" />
+>     <circle cx="230" cy="80" r="6" style="fill: #2e7d32; stroke: #ffffff; stroke-width: 2;" />
+>     <circle cx="310" cy="80" r="6" style="fill: #2e7d32; stroke: #ffffff; stroke-width: 2;" />
+>     <circle cx="390" cy="160" r="6" style="fill: #2e7d32; stroke: #ffffff; stroke-width: 2;" />
+>     <circle cx="470" cy="240" r="4" style="fill: #888888; stroke: #ffffff; stroke-width: 1.5;" />
+>     <text x="150" y="105" style="font-family: Arial; font-size: 12px; font-weight: bold; fill: #2e7d32; text-anchor: middle;">(0,5)</text>
+>     <text x="230" y="105" style="font-family: Arial; font-size: 12px; font-weight: bold; fill: #2e7d32; text-anchor: middle;">(1,5)</text>
+>     <text x="310" y="105" style="font-family: Arial; font-size: 12px; font-weight: bold; fill: #2e7d32; text-anchor: middle;">(2,5)</text>
+>     <text x="390" y="185" style="font-family: Arial; font-size: 12px; font-weight: bold; fill: #2e7d32; text-anchor: middle;">(3,4)</text>
+>     <text x="475" y="262" style="font-family: Arial; font-size: 11px; fill: #888888; text-anchor: middle;">(4,3) 终止</text>
+>     <line x1="150" y1="480" x2="480" y2="150" style="stroke: #888888; stroke-width: 1.5; stroke-dasharray: 4,4;" />
+>     <text x="485" y="145" style="font-family: Arial; font-size: 12px; fill: #888888; font-weight: bold;">y = x 边界线</text>
+>     <circle cx="230" cy="120" r="4" style="fill: #990099;" />
+>     <circle cx="310" cy="120" r="4" style="fill: #990099;" />
+>     <circle cx="390" cy="120" r="4" style="fill: #990099;" />
+>     <circle cx="470" cy="200" r="4" style="fill: #990099;" />
+>     <text x="230" y="112" style="font-family: Arial; font-size: 11px; fill: #990099; text-anchor: middle;">M₁</text>
+>     <text x="310" y="112" style="font-family: Arial; font-size: 11px; fill: #990099; text-anchor: middle;">M₂</text>
+>     <text x="390" y="112" style="font-family: Arial; font-size: 11px; fill: #990099; text-anchor: middle;">M₃</text>
+>     <text x="470" y="192" style="font-family: Arial; font-size: 11px; fill: #990099; text-anchor: middle;">M₄</text>
+>     <line x1="100" y1="480" x2="680" y2="480" style="stroke: #333333; stroke-width: 2;" marker-end="url(#arrow)" />
+>     <line x1="150" y1="520" x2="150" y2="50" style="stroke: #333333; stroke-width: 2;" marker-end="url(#arrow)" />
+>     <text x="675" y="505" style="font-family: Arial; font-size: 16px; font-weight: bold; font-style: italic; fill: #333333;">X</text>
+>     <text x="130" y="60" style="font-family: Arial; font-size: 16px; font-weight: bold; font-style: italic; fill: #333333;">Y</text>
+>     <text x="150" y="505" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">0</text>
+>     <text x="230" y="505" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">1</text>
+>     <text x="310" y="505" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">2</text>
+>     <text x="390" y="505" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">3</text>
+>     <text x="470" y="505" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">4</text>
+>     <text x="550" y="505" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">5</text>
+>     <text x="630" y="505" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">6</text>
+>     <text x="125" y="405" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">1</text>
+>     <text x="125" y="325" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">2</text>
+>     <text x="125" y="245" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">3</text>
+>     <text x="125" y="165" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">4</text>
+>     <text x="125" y="85" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">5</text>
+>     <g transform="translate(440, 80)">
+>       <rect x="0" y="0" width="220" height="120" style="fill: #f9f9f9; stroke: #dddddd; stroke-width: 1; rx: 4;" />
+>       <line x1="15" y1="20" x2="45" y2="20" style="stroke: #ff9900; stroke-width: 3; stroke-dasharray: 4,3;" />
+>       <text x="55" y="24" style="font-family: Arial; font-size: 12px; fill: #333333;">理想圆弧 (R=5)</text>
+>       <rect x="15" y="42" width="16" height="16" style="fill: #4caf50; fill-opacity: 0.25; stroke: #4caf50; stroke-width: 1;" />
+>       <circle cx="23" cy="50" r="4" style="fill: #2e7d32;" />
+>       <text x="40" y="54" style="font-family: Arial; font-size: 12px; fill: #333333;">选中的像素点</text>
+>       <circle cx="23" cy="80" r="4" style="fill: #990099;" />
+>       <text x="40" y="84" style="font-family: Arial; font-size: 12px; fill: #333333;">中点判别位置 (M)</text>
+>       <line x1="15" y1="105" x2="45" y2="105" style="stroke: #888888; stroke-width: 1.5; stroke-dasharray: 4,4;" />
+>       <text x="55" y="109" style="font-family: Arial; font-size: 12px; fill: #888888;">y = x 对角边界</text>
+>     </g>
+>   </svg>
+>   </div>
+>
 >   算法在实际运行中，只需计算出这 4 个坐标点，再利用圆的八分对称性即可直接绘制出整个完整的圆。
 
 ---
@@ -1755,6 +1831,61 @@ $$
 
   复合变换矩阵表达为（右乘列向量的顺序）：
 
+<div align="center">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 280" width="100%" height="100%" style="background-color: #ffffff; max-width: 700px; display: block; margin: auto;">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#333333" />
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0288d1" />
+    </marker>
+  </defs>
+  <g transform="translate(10, 20)">
+    <text x="130" y="20" style="font-family: Arial; font-size: 13px; font-weight: bold; fill: #333333; text-anchor: middle;">步骤1: 平移使其与原点重合</text>
+    <line x1="30" y1="200" x2="230" y2="200" style="stroke: #cccccc; stroke-width: 1.5;" marker-end="url(#arrow)" />
+    <line x1="50" y1="220" x2="50" y2="40" style="stroke: #cccccc; stroke-width: 1.5;" marker-end="url(#arrow)" />
+    <text x="225" y="215" style="font-family: Arial; font-size: 11px; fill: #666;">X</text>
+    <text x="35" y="45" style="font-family: Arial; font-size: 11px; fill: #666;">Y</text>
+    <circle cx="150" cy="100" r="5" style="fill: #e91e63;" />
+    <text x="160" y="95" style="font-family: Arial; font-size: 11px; fill: #e91e63; font-weight: bold;">F(xf, yf)</text>
+    <polygon points="130,110 170,110 150,70" style="fill: #ffb74d; stroke: #ff9800; stroke-width: 1.5; fill-opacity: 0.6;" />
+    <path d="M 150 100 Q 100 130 55 200" style="fill: none; stroke: #0288d1; stroke-width: 2; stroke-dasharray: 4,4;" marker-end="url(#arrow-blue)" />
+    <text x="95" y="130" style="font-family: Arial; font-size: 11px; fill: #0288d1; font-weight: bold;">T(-xf, -yf)</text>
+  </g>
+  <g transform="translate(310, 20)">
+    <text x="130" y="20" style="font-family: Arial; font-size: 13px; font-weight: bold; fill: #333333; text-anchor: middle;">步骤2: 绕原点旋转 θ</text>
+    <line x1="30" y1="200" x2="230" y2="200" style="stroke: #cccccc; stroke-width: 1.5;" marker-end="url(#arrow)" />
+    <line x1="50" y1="220" x2="50" y2="40" style="stroke: #cccccc; stroke-width: 1.5;" marker-end="url(#arrow)" />
+    <text x="225" y="215" style="font-family: Arial; font-size: 11px; fill: #666;">X</text>
+    <text x="35" y="45" style="font-family: Arial; font-size: 11px; fill: #666;">Y</text>
+    <circle cx="50" cy="200" r="5" style="fill: #e91e63;" />
+    <polygon points="30,210 70,210 50,170" style="fill: #ffb74d; stroke: #ff9800; stroke-width: 1.5; fill-opacity: 0.3; stroke-dasharray: 2,2;" />
+    <g transform="translate(50,200) rotate(45) translate(-50,-200)">
+      <polygon points="30,210 70,210 50,170" style="fill: #ffb74d; stroke: #ff9800; stroke-width: 1.5; fill-opacity: 0.8;" />
+    </g>
+    <path d="M 50 160 A 40 40 0 0 1 78 172" style="fill: none; stroke: #0288d1; stroke-width: 2;" marker-end="url(#arrow-blue)" />
+    <text x="80" y="160" style="font-family: Arial; font-size: 11px; fill: #0288d1; font-weight: bold;">R(θ)</text>
+  </g>
+  <g transform="translate(610, 20)">
+    <text x="130" y="20" style="font-family: Arial; font-size: 13px; font-weight: bold; fill: #333333; text-anchor: middle;">步骤3: 反向平移回原位置</text>
+    <line x1="30" y1="200" x2="230" y2="200" style="stroke: #cccccc; stroke-width: 1.5;" marker-end="url(#arrow)" />
+    <line x1="50" y1="220" x2="50" y2="40" style="stroke: #cccccc; stroke-width: 1.5;" marker-end="url(#arrow)" />
+    <text x="225" y="215" style="font-family: Arial; font-size: 11px; fill: #666;">X</text>
+    <text x="35" y="45" style="font-family: Arial; font-size: 11px; fill: #666;">Y</text>
+    <circle cx="150" cy="100" r="5" style="fill: #e91e63;" />
+    <text x="160" y="95" style="font-family: Arial; font-size: 11px; fill: #e91e63; font-weight: bold;">F(xf, yf)</text>
+    <path d="M 50 200 Q 100 130 150 100" style="fill: none; stroke: #0288d1; stroke-width: 2; stroke-dasharray: 4,4;" marker-end="url(#arrow-blue)" />
+    <text x="110" y="160" style="font-family: Arial; font-size: 11px; fill: #0288d1; font-weight: bold;">T(xf, yf)</text>
+    <g transform="translate(100,-100) translate(50,200) rotate(45) translate(-50,-200)">
+      <polygon points="30,210 70,210 50,170" style="fill: #ffb74d; stroke: #ff9800; stroke-width: 1.5; fill-opacity: 0.8;" />
+    </g>
+  </g>
+</svg>
+</div>
+
+  复合变换矩阵表达为（右乘列向量的顺序）：
+
   $$
   M = T(x_f, y_f) \cdot R(\theta) \cdot T(-x_f, -y_f)
   $$
@@ -1953,6 +2084,56 @@ graph TD
 * **核心组成**：需要两个与屏幕分辨率大小完全相同的二维数据缓存：
   - **帧缓存 (Frame Buffer / Color Buffer)**：记录当前像素点的 RGB 颜色。
   - **深度缓存 (Depth Buffer / Z-Buffer)**：记录当前像素点所关联的最靠近视点的物体深度 $Z$ 值。
+
+<div align="center">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="100%" height="100%" style="background-color: #ffffff; max-width: 700px; display: block; margin: auto;">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#333333" />
+    </marker>
+  </defs>
+  <text x="200" y="30" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #111111; text-anchor: middle;">3D 场景空间 (视点看向物体)</text>
+  <circle cx="50" cy="200" r="10" style="fill: #333333;" />
+  <path d="M 50 190 L 30 200 L 50 210 Z" style="fill: #333333;" />
+  <text x="50" y="175" style="font-family: Arial; font-size: 12px; font-weight: bold; fill: #333333; text-anchor: middle;">Camera (视点)</text>
+  <line x1="50" y1="200" x2="350" y2="100" style="stroke: #cccccc; stroke-width: 1; stroke-dasharray: 4,4;" />
+  <line x1="50" y1="200" x2="350" y2="300" style="stroke: #cccccc; stroke-width: 1; stroke-dasharray: 4,4;" />
+  <polygon points="180,120 250,220 160,250" style="fill: #f44336; fill-opacity: 0.8; stroke: #d32f2f; stroke-width: 1.5;" />
+  <text x="195" y="195" style="font-family: Arial; font-size: 12px; font-weight: bold; fill: #ffffff;">红三角形 (z=0.3)</text>
+  <polygon points="230,100 320,180 240,260" style="fill: #2196f3; fill-opacity: 0.6; stroke: #1976d2; stroke-width: 1.5;" />
+  <text x="270" y="165" style="font-family: Arial; font-size: 12px; font-weight: bold; fill: #ffffff;">蓝三角形 (z=0.6)</text>
+  <path d="M 230,175 L 200,80" style="stroke: #333333; stroke-width: 1; marker-end: url(#arrow);" />
+  <text x="200" y="70" style="font-family: Arial; font-size: 11px; fill: #333333; text-anchor: middle;">遮挡发生处 (红遮挡蓝)</text>
+  <line x1="400" y1="20" x2="400" y2="380" style="stroke: #dddddd; stroke-width: 2;" />
+  <text x="600" y="30" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #111111; text-anchor: middle;">帧缓存与深度缓存渲染结果</text>
+  <g transform="translate(480, 80)">
+    <rect x="0" y="0" width="40" height="40" style="fill: #ffffff; stroke: #e0e0e0;" /><text x="20" y="25" style="font-family: Arial; font-size: 10px; fill: #888; text-anchor: middle;">1.0</text>
+    <rect x="40" y="0" width="40" height="40" style="fill: #ffffff; stroke: #e0e0e0;" /><text x="60" y="25" style="font-family: Arial; font-size: 10px; fill: #888; text-anchor: middle;">1.0</text>
+    <rect x="80" y="0" width="40" height="40" style="fill: #2196f3; fill-opacity: 0.6; stroke: #1976d2;" /><text x="100" y="25" style="font-family: Arial; font-size: 10px; fill: #fff; text-anchor: middle;">0.6</text>
+    <rect x="120" y="0" width="40" height="40" style="fill: #ffffff; stroke: #e0e0e0;" /><text x="140" y="25" style="font-family: Arial; font-size: 10px; fill: #888; text-anchor: middle;">1.0</text>
+    <rect x="0" y="40" width="40" height="40" style="fill: #f44336; fill-opacity: 0.8; stroke: #d32f2f;" /><text x="20" y="65" style="font-family: Arial; font-size: 10px; fill: #fff; text-anchor: middle;">0.3</text>
+    <rect x="40" y="40" width="40" height="40" style="fill: #f44336; fill-opacity: 0.8; stroke: #d32f2f;" /><text x="60" y="65" style="font-family: Arial; font-size: 10px; fill: #fff; text-anchor: middle;">0.3</text>
+    <rect x="80" y="40" width="40" height="40" style="fill: #f44336; fill-opacity: 0.8; stroke: #d32f2f;" /><text x="100" y="65" style="font-family: Arial; font-size: 10px; fill: #fff; text-anchor: middle;">0.3</text>
+    <rect x="120" y="40" width="40" height="40" style="fill: #2196f3; fill-opacity: 0.6; stroke: #1976d2;" /><text x="140" y="65" style="font-family: Arial; font-size: 10px; fill: #fff; text-anchor: middle;">0.6</text>
+    <rect x="0" y="80" width="40" height="40" style="fill: #f44336; fill-opacity: 0.8; stroke: #d32f2f;" /><text x="20" y="105" style="font-family: Arial; font-size: 10px; fill: #fff; text-anchor: middle;">0.3</text>
+    <rect x="40" y="80" width="40" height="40" style="fill: #f44336; fill-opacity: 0.8; stroke: #d32f2f;" /><text x="60" y="105" style="font-family: Arial; font-size: 10px; fill: #fff; text-anchor: middle;">0.3</text>
+    <rect x="80" y="80" width="40" height="40" style="fill: #f44336; fill-opacity: 0.8; stroke: #d32f2f;" /><text x="100" y="105" style="font-family: Arial; font-size: 10px; fill: #fff; text-anchor: middle;">0.3</text>
+    <rect x="120" y="80" width="40" height="40" style="fill: #2196f3; fill-opacity: 0.6; stroke: #1976d2;" /><text x="140" y="105" style="font-family: Arial; font-size: 10px; fill: #fff; text-anchor: middle;">0.6</text>
+    <rect x="0" y="120" width="40" height="40" style="fill: #ffffff; stroke: #e0e0e0;" /><text x="20" y="145" style="font-family: Arial; font-size: 10px; fill: #888; text-anchor: middle;">1.0</text>
+    <rect x="40" y="120" width="40" height="40" style="fill: #f44336; fill-opacity: 0.8; stroke: #d32f2f;" /><text x="60" y="145" style="font-family: Arial; font-size: 10px; fill: #fff; text-anchor: middle;">0.3</text>
+    <rect x="80" y="120" width="40" height="40" style="fill: #ffffff; stroke: #e0e0e0;" /><text x="100" y="145" style="font-family: Arial; font-size: 10px; fill: #888; text-anchor: middle;">1.0</text>
+    <rect x="120" y="120" width="40" height="40" style="fill: #ffffff; stroke: #e0e0e0;" /><text x="140" y="145" style="font-family: Arial; font-size: 10px; fill: #888; text-anchor: middle;">1.0</text>
+    <g transform="translate(-40, 185)">
+      <rect x="0" y="0" width="12" height="12" style="fill: #f44336; fill-opacity: 0.8; stroke: #d32f2f;" />
+      <text x="18" y="10" style="font-family: Arial; font-size: 11px; fill: #333;">Frame:红 / Depth:0.3</text>
+      <rect x="130" y="0" width="12" height="12" style="fill: #2196f3; fill-opacity: 0.6; stroke: #1976d2;" />
+      <text x="148" y="10" style="font-family: Arial; font-size: 11px; fill: #333;">Frame:蓝 / Depth:0.6</text>
+    </g>
+  </g>
+  <text x="600" y="320" style="font-family: Arial; font-size: 12px; fill: #e53935; font-weight: bold; text-anchor: middle;">重叠区域 Z-Buffer 更新判定: 0.3 &lt; 0.6 (红覆盖蓝)</text>
+</svg>
+</div>
+
 * **算法计算执行过程**：
   1. 初始化 Z-Buffer 中所有像素的深度值为最大可能值（如 $1.0$），Frame Buffer 初始化为背景色。
   2. 遍历场景中的每一个多边形。
@@ -2097,6 +2278,53 @@ $$
 ## 四、 三种多边形着色 (Shading) 算法
 
 在计算多边形表面各处色彩时，有如下三种插值方案：
+
+<div align="center">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250" width="100%" height="100%" style="background-color: #ffffff; max-width: 650px; display: block; margin: auto;">
+  <defs>
+    <radialGradient id="gouraud-grad" cx="40%" cy="40%" r="60%" fx="30%" fy="30%">
+      <stop offset="0%" stop-color="#a0c0f0" />
+      <stop offset="50%" stop-color="#4a70a0" />
+      <stop offset="100%" stop-color="#1a2540" />
+    </radialGradient>
+    <radialGradient id="phong-diffuse" cx="40%" cy="40%" r="60%" fx="30%" fy="30%">
+      <stop offset="0%" stop-color="#70a0e0" />
+      <stop offset="70%" stop-color="#2c5080" />
+      <stop offset="100%" stop-color="#0f1830" />
+    </radialGradient>
+    <radialGradient id="phong-specular" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
+      <stop offset="30%" stop-color="#ffffff" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <g transform="translate(100, 110)">
+    <polygon points="0,-70 45,-50 0,0" style="fill: #7aa0d0; stroke: #3f5d80; stroke-width: 0.5;" />
+    <polygon points="45,-50 70,0 0,0" style="fill: #5a80b0; stroke: #3f5d80; stroke-width: 0.5;" />
+    <polygon points="70,0 45,50 0,0" style="fill: #3a5f8f; stroke: #3f5d80; stroke-width: 0.5;" />
+    <polygon points="45,50 0,70 0,0" style="fill: #254066; stroke: #3f5d80; stroke-width: 0.5;" />
+    <polygon points="0,70 -45,50 0,0" style="fill: #152540; stroke: #3f5d80; stroke-width: 0.5;" />
+    <polygon points="-45,50 -70,0 0,0" style="fill: #1c3050; stroke: #3f5d80; stroke-width: 0.5;" />
+    <polygon points="-70,0 -45,-50 0,0" style="fill: #3c5880; stroke: #3f5d80; stroke-width: 0.5;" />
+    <polygon points="-45,-50 0,-70 0,0" style="fill: #5c7ca8; stroke: #3f5d80; stroke-width: 0.5;" />
+    <circle cx="0" cy="0" r="70" style="fill: none; stroke: #333333; stroke-width: 1.5;" />
+    <text x="0" y="95" style="font-family: Arial; font-size: 13px; font-weight: bold; fill: #333; text-anchor: middle;">Flat Shading (恒定着色)</text>
+    <text x="0" y="112" style="font-family: Arial; font-size: 11px; fill: #666; text-anchor: middle;">逐多边形计算颜色，呈块状</text>
+  </g>
+  <g transform="translate(350, 110)">
+    <circle cx="0" cy="0" r="70" fill="url(#gouraud-grad)" stroke="#333333" stroke-width="1.5" />
+    <text x="0" y="95" style="font-family: Arial; font-size: 13px; font-weight: bold; fill: #333; text-anchor: middle;">Gouraud Shading (顶点插值)</text>
+    <text x="0" y="112" style="font-family: Arial; font-size: 11px; fill: #666; text-anchor: middle;">逐顶点计算光照，颜色线性插值</text>
+  </g>
+  <g transform="translate(600, 110)">
+    <circle cx="0" cy="0" r="70" fill="url(#phong-diffuse)" stroke="#333333" stroke-width="1.5" />
+    <ellipse cx="-15" cy="-15" rx="20" ry="20" fill="url(#phong-specular)" transform="rotate(-15 -15 -15)" />
+    <text x="0" y="95" style="font-family: Arial; font-size: 13px; font-weight: bold; fill: #333; text-anchor: middle;">Phong Shading (法向插值)</text>
+    <text x="0" y="112" style="font-family: Arial; font-size: 11px; fill: #666; text-anchor: middle;">逐像素插值法向并计算光照</text>
+  </g>
+</svg>
+</div>
+
 
 ### 1. Flat Shading (恒定着色)
 
