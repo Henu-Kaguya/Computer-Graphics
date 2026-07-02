@@ -348,49 +348,6 @@
 >
 > 已知起点为 $(0,0)$，终点为 $(5,2)$，则：
 >
-> <div align="center">
-> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 280" width="100%" style="background-color: #ffffff; max-width: 450px; display: block; margin: auto;">
->   <defs>
->     <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
->       <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#f0f0f0" stroke-width="1"/>
->     </pattern>
->     <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
->       <path d="M 0 0 L 10 5 L 0 10 z" fill="#333" />
->     </marker>
->   </defs>
->   <rect width="100%" height="100%" fill="url(#grid)" />
->   <rect x="35" y="235" width="30" height="30" rx="4" fill="rgba(64, 158, 255, 0.2)" stroke="#409EFF" stroke-width="1.5" />
->   <rect x="85" y="235" width="30" height="30" rx="4" fill="rgba(64, 158, 255, 0.2)" stroke="#409EFF" stroke-width="1.5" />
->   <rect x="135" y="185" width="30" height="30" rx="4" fill="rgba(64, 158, 255, 0.2)" stroke="#409EFF" stroke-width="1.5" />
->   <rect x="185" y="185" width="30" height="30" rx="4" fill="rgba(64, 158, 255, 0.2)" stroke="#409EFF" stroke-width="1.5" />
->   <rect x="235" y="135" width="30" height="30" rx="4" fill="rgba(64, 158, 255, 0.2)" stroke="#409EFF" stroke-width="1.5" />
->   <rect x="285" y="135" width="30" height="30" rx="4" fill="rgba(64, 158, 255, 0.2)" stroke="#409EFF" stroke-width="1.5" />
->   <line x1="30" y1="250" x2="350" y2="250" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)" />
->   <line x1="50" y1="270" x2="50" y2="30" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)" />
->   <text x="345" y="265" font-family="sans-serif" font-size="12" fill="#333">x</text>
->   <text x="35" y="35" font-family="sans-serif" font-size="12" fill="#333">y</text>
->   <text x="38" y="265" font-family="sans-serif" font-size="11" fill="#666">0</text>
->   <line x1="100" y1="250" x2="100" y2="254" stroke="#333" /><text x="97" y="266" font-family="sans-serif" font-size="10" fill="#666">1</text>
->   <line x1="150" y1="250" x2="150" y2="254" stroke="#333" /><text x="147" y="266" font-family="sans-serif" font-size="10" fill="#666">2</text>
->   <line x1="200" y1="250" x2="200" y2="254" stroke="#333" /><text x="197" y="266" font-family="sans-serif" font-size="10" fill="#666">3</text>
->   <line x1="250" y1="250" x2="250" y2="254" stroke="#333" /><text x="247" y="266" font-family="sans-serif" font-size="10" fill="#666">4</text>
->   <line x1="300" y1="250" x2="300" y2="254" stroke="#333" /><text x="297" y="266" font-family="sans-serif" font-size="10" fill="#666">5</text>
->   <line x1="46" y1="200" x2="50" y2="200" stroke="#333" /><text x="34" y="204" font-family="sans-serif" font-size="10" fill="#666">1</text>
->   <line x1="46" y1="150" x2="50" y2="150" stroke="#333" /><text x="34" y="154" font-family="sans-serif" font-size="10" fill="#666">2</text>
->   <line x1="50" y1="250" x2="300" y2="150" stroke="#F56C6C" stroke-width="2" stroke-dasharray="4 3" />
->   <circle cx="50" cy="250" r="4" fill="#409EFF" />
->   <circle cx="100" cy="250" r="4" fill="#409EFF" />
->   <circle cx="150" cy="200" r="4" fill="#409EFF" />
->   <circle cx="200" cy="200" r="4" fill="#409EFF" />
->   <circle cx="250" cy="150" r="4" fill="#409EFF" />
->   <circle cx="300" cy="150" r="4" fill="#409EFF" />
->   <circle cx="50" cy="250" r="5" fill="#F56C6C" />
->   <circle cx="300" cy="150" r="5" fill="#F56C6C" />
->   <text x="45" y="225" font-family="sans-serif" font-size="11" font-weight="bold" fill="#F56C6C">P0(0,0)</text>
->   <text x="290" y="130" font-family="sans-serif" font-size="11" font-weight="bold" fill="#F56C6C">P1(5,2)</text>
-> </svg>
-> </div>
->
 > - $\Delta x = 5$ 且 $\Delta y = 2$
 > - 斜率 $k = \frac{2}{5} = 0.4$
 > - 终点像素为 $(5,2)$，需要在每一方向步进中决定下一个像素坐标。
@@ -398,6 +355,74 @@
 > 以下使用上述三种演进阶段的算法依次进行完整的计算递推过程展示：
 >
 > #### 1. Bresenham 原始算法（包含小数与 0.5 比较）
+>
+> <div align="center">
+> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%" style="background-color: #ffffff; max-width: 600px; display: block; margin: auto;">
+>   <defs>
+>     <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+>       <path d="M 0 0 L 10 5 L 0 10 z" fill="#333333" />
+>     </marker>
+>   </defs>
+>   <text x="400" y="40" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #111111; text-anchor: middle;">Bresenham 原始算法演示: P₀(0,0) 到 P₁(5,2) [d 与 0.5 比较]</text>
+>   <line x1="230" y1="160" x2="230" y2="480" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="310" y1="160" x2="310" y2="480" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="390" y1="160" x2="390" y2="480" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="470" y1="160" x2="470" y2="480" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="550" y1="160" x2="550" y2="480" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="630" y1="160" x2="630" y2="480" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="150" y1="400" x2="630" y2="400" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="150" y1="320" x2="630" y2="320" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="150" y1="240" x2="630" y2="240" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="150" y1="160" x2="630" y2="160" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="150" y1="440" x2="630" y2="440" style="stroke: #bc13fe; stroke-width: 1.5; stroke-dasharray: 8,4,2,4;" />
+>   <line x1="150" y1="360" x2="630" y2="360" style="stroke: #bc13fe; stroke-width: 1.5; stroke-dasharray: 8,4,2,4;" />
+>   <text x="640" y="444" style="font-family: Arial; font-size: 12px; fill: #bc13fe; font-weight: bold;">y = 0.5 临界线</text>
+>   <text x="640" y="364" style="font-family: Arial; font-size: 12px; fill: #bc13fe; font-weight: bold;">y = 1.5 临界线</text>
+>   <line x1="150" y1="480" x2="550" y2="320" style="stroke: #ff9900; stroke-width: 3.5; stroke-dasharray: 6,4;" />
+>   <rect x="110" y="440" width="80" height="80" style="fill: #4caf50; fill-opacity: 0.22; stroke: #4caf50; stroke-width: 1;" />
+>   <rect x="190" y="440" width="80" height="80" style="fill: #4caf50; fill-opacity: 0.22; stroke: #4caf50; stroke-width: 1;" />
+>   <rect x="270" y="360" width="80" height="80" style="fill: #4caf50; fill-opacity: 0.22; stroke: #4caf50; stroke-width: 1;" />
+>   <rect x="350" y="360" width="80" height="80" style="fill: #4caf50; fill-opacity: 0.22; stroke: #4caf50; stroke-width: 1;" />
+>   <rect x="430" y="280" width="80" height="80" style="fill: #4caf50; fill-opacity: 0.22; stroke: #4caf50; stroke-width: 1;" />
+>   <rect x="510" y="280" width="80" height="80" style="fill: #4caf50; fill-opacity: 0.22; stroke: #4caf50; stroke-width: 1;" />
+>   <circle cx="150" cy="480" r="6" style="fill: #2e7d32; stroke: #ffffff; stroke-width: 2;" />
+>   <circle cx="230" cy="480" r="6" style="fill: #2e7d32; stroke: #ffffff; stroke-width: 2;" />
+>   <circle cx="310" cy="400" r="6" style="fill: #2e7d32; stroke: #ffffff; stroke-width: 2;" />
+>   <circle cx="390" cy="400" r="6" style="fill: #2e7d32; stroke: #ffffff; stroke-width: 2;" />
+>   <circle cx="470" cy="320" r="6" style="fill: #2e7d32; stroke: #ffffff; stroke-width: 2;" />
+>   <circle cx="550" cy="320" r="6" style="fill: #2e7d32; stroke: #ffffff; stroke-width: 2;" />
+>   <text x="150" y="505" style="font-family: Arial; font-size: 12px; font-weight: bold; fill: #2e7d32; text-anchor: middle;">(0,0)</text>
+>   <text x="230" y="505" style="font-family: Arial; font-size: 12px; font-weight: bold; fill: #2e7d32; text-anchor: middle;">(1,0)</text>
+>   <text x="310" y="425" style="font-family: Arial; font-size: 12px; font-weight: bold; fill: #2e7d32; text-anchor: middle;">(2,1)</text>
+>   <text x="390" y="425" style="font-family: Arial; font-size: 12px; font-weight: bold; fill: #2e7d32; text-anchor: middle;">(3,1)</text>
+>   <text x="470" y="345" style="font-family: Arial; font-size: 12px; font-weight: bold; fill: #2e7d32; text-anchor: middle;">(4,2)</text>
+>   <text x="550" y="345" style="font-family: Arial; font-size: 12px; font-weight: bold; fill: #2e7d32; text-anchor: middle;">(5,2)</text>
+>   <line x1="100" y1="480" x2="680" y2="480" style="stroke: #333333; stroke-width: 2;" marker-end="url(#arrow)" />
+>   <line x1="150" y1="520" x2="150" y2="120" style="stroke: #333333; stroke-width: 2;" marker-end="url(#arrow)" />
+>   <text x="675" y="505" style="font-family: Arial; font-size: 16px; font-weight: bold; font-style: italic; fill: #333333;">X</text>
+>   <text x="130" y="130" style="font-family: Arial; font-size: 16px; font-weight: bold; font-style: italic; fill: #333333;">Y</text>
+>   <text x="150" y="530" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">0</text>
+>   <text x="230" y="530" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">1</text>
+>   <text x="310" y="530" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">2</text>
+>   <text x="390" y="530" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">3</text>
+>   <text x="470" y="530" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">4</text>
+>   <text x="550" y="530" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">5</text>
+>   <text x="630" y="530" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">6</text>
+>   <text x="125" y="405" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">1</text>
+>   <text x="125" y="325" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">2</text>
+>   <text x="125" y="245" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">3</text>
+>   <g transform="translate(140, 75)">
+>     <rect x="0" y="0" width="520" height="40" style="fill: #f9f9f9; stroke: #dddddd; stroke-width: 1; rx: 4;" />
+>     <line x1="15" y1="20" x2="45" y2="20" style="stroke: #ff9900; stroke-width: 3; stroke-dasharray: 4,3;" />
+>     <text x="55" y="24" style="font-family: Arial; font-size: 12px; fill: #333333;">理想直线段</text>
+>     <line x1="140" y1="20" x2="170" y2="20" style="stroke: #bc13fe; stroke-width: 1.5; stroke-dasharray: 5,2,1,2;" />
+>     <text x="180" y="24" style="font-family: Arial; font-size: 12px; fill: #333333;">0.5 误差阈值边界线</text>
+>     <rect x="315" y="12" width="16" height="16" style="fill: #4caf50; fill-opacity: 0.25; stroke: #4caf50; stroke-width: 1;" />
+>     <circle cx="323" cy="20" r="4" style="fill: #2e7d32;" />
+>     <text x="340" y="24" style="font-family: Arial; font-size: 12px; fill: #333333;">Bresenham选中的离散像素</text>
+>   </g>
+> </svg>
+> </div>
 >
 > - **初始化**：当前点 $(x_0, y_0) = (0, 0)$，误差偏移量初始值 $d = 0$。
 > - **状态更新规则**：
@@ -418,6 +443,65 @@
 >
 > #### 2. 改进算法 1：消除与 0.5 的比较（引入误差变量代换 $e$）
 >
+> <div align="center">
+> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%" style="background-color: #ffffff; max-width: 600px; display: block; margin: auto;">
+>   <defs>
+>     <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+>       <path d="M 0 0 L 10 5 L 0 10 z" fill="#333333" />
+>     </marker>
+>   </defs>
+>   <text x="400" y="40" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #111111; text-anchor: middle;">Bresenham 改进算法1演示: 消除0.5比较 [误差变量代换 e]</text>
+>   <line x1="230" y1="160" x2="230" y2="480" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="310" y1="160" x2="310" y2="480" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="390" y1="160" x2="390" y2="480" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="470" y1="160" x2="470" y2="480" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="550" y1="160" x2="550" y2="480" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="630" y1="160" x2="630" y2="480" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="150" y1="400" x2="630" y2="400" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="150" y1="320" x2="630" y2="320" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="150" y1="240" x2="630" y2="240" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="150" y1="160" x2="630" y2="160" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="150" y1="440" x2="630" y2="440" style="stroke: #009688; stroke-width: 1.5; stroke-dasharray: 8,4;" />
+>   <line x1="150" y1="360" x2="630" y2="360" style="stroke: #009688; stroke-width: 1.5; stroke-dasharray: 8,4;" />
+>   <text x="640" y="444" style="font-family: Arial; font-size: 12px; fill: #009688; font-weight: bold;">e = 0 决策临界线</text>
+>   <text x="640" y="364" style="font-family: Arial; font-size: 12px; fill: #009688; font-weight: bold;">e = 0 决策临界线</text>
+>   <line x1="150" y1="480" x2="550" y2="320" style="stroke: #ff9900; stroke-width: 3.5; stroke-dasharray: 6,4;" />
+>   <rect x="110" y="440" width="80" height="80" style="fill: #e1f5fe; fill-opacity: 0.4; stroke: #0288d1; stroke-width: 1;" />
+>   <rect x="190" y="440" width="80" height="80" style="fill: #e1f5fe; fill-opacity: 0.4; stroke: #0288d1; stroke-width: 1;" />
+>   <rect x="270" y="360" width="80" height="80" style="fill: #e1f5fe; fill-opacity: 0.4; stroke: #0288d1; stroke-width: 1;" />
+>   <rect x="350" y="360" width="80" height="80" style="fill: #e1f5fe; fill-opacity: 0.4; stroke: #0288d1; stroke-width: 1;" />
+>   <rect x="430" y="280" width="80" height="80" style="fill: #e1f5fe; fill-opacity: 0.4; stroke: #0288d1; stroke-width: 1;" />
+>   <rect x="510" y="280" width="80" height="80" style="fill: #e1f5fe; fill-opacity: 0.4; stroke: #0288d1; stroke-width: 1;" />
+>   <circle cx="150" cy="480" r="6" style="fill: #0288d1; stroke: #ffffff; stroke-width: 2;" />
+>   <circle cx="230" cy="480" r="6" style="fill: #0288d1; stroke: #ffffff; stroke-width: 2;" />
+>   <circle cx="310" cy="400" r="6" style="fill: #0288d1; stroke: #ffffff; stroke-width: 2;" />
+>   <circle cx="390" cy="400" r="6" style="fill: #0288d1; stroke: #ffffff; stroke-width: 2;" />
+>   <circle cx="470" cy="320" r="6" style="fill: #0288d1; stroke: #ffffff; stroke-width: 2;" />
+>   <circle cx="550" cy="320" r="6" style="fill: #0288d1; stroke: #ffffff; stroke-width: 2;" />
+>   <line x1="100" y1="480" x2="680" y2="480" style="stroke: #333333; stroke-width: 2;" marker-end="url(#arrow)" />
+>   <line x1="150" y1="520" x2="150" y2="120" style="stroke: #333333; stroke-width: 2;" marker-end="url(#arrow)" />
+>   <text x="675" y="505" style="font-family: Arial; font-size: 16px; font-weight: bold; font-style: italic; fill: #333333;">X</text>
+>   <text x="130" y="130" style="font-family: Arial; font-size: 16px; font-weight: bold; font-style: italic; fill: #333333;">Y</text>
+>   <text x="150" y="530" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">0</text>
+>   <text x="230" y="530" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">1</text>
+>   <text x="310" y="530" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">2</text>
+>   <text x="390" y="530" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">3</text>
+>   <text x="470" y="530" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">4</text>
+>   <text x="550" y="530" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">5</text>
+>   <text x="125" y="405" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">1</text>
+>   <text x="125" y="325" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">2</text>
+>   <g transform="translate(140, 75)">
+>     <rect x="0" y="0" width="520" height="40" style="fill: #f9f9f9; stroke: #dddddd; stroke-width: 1; rx: 4;" />
+>     <line x1="15" y1="20" x2="45" y2="20" style="stroke: #ff9900; stroke-width: 3; stroke-dasharray: 4,3;" />
+>     <text x="55" y="24" style="font-family: Arial; font-size: 12px; fill: #333333;">理想直线</text>
+>     <line x1="140" y1="20" x2="170" y2="20" style="stroke: #009688; stroke-width: 1.5; stroke-dasharray: 6,4;" />
+>     <text x="180" y="24" style="font-family: Arial; font-size: 12px; fill: #333333;">e = 0 零点分界线</text>
+>     <rect x="315" y="12" width="16" height="16" style="fill: #e1f5fe; stroke: #0288d1; stroke-width: 1;" />
+>     <text x="340" y="24" style="font-family: Arial; font-size: 12px; fill: #333333;">选中的像素点(基于 e 符号判断)</text>
+>   </g>
+> </svg>
+> </div>
+>
 > - **初始化**：通过 $e = d - 0.5$，误差偏置量初始值 $e_0 = -0.5$。
 > - **状态更新规则**：
 >   - 每次步进计算临时值 $e_{\text{temp}} = e_i + k$。
@@ -437,8 +521,72 @@
 >
 > #### 3. 改进算法 2：彻底摆脱浮点数（引入整型判别式 $E$）
 >
+> <div align="center">
+> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%" style="background-color: #ffffff; max-width: 600px; display: block; margin: auto;">
+>   <defs>
+>     <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+>       <path d="M 0 0 L 10 5 L 0 10 z" fill="#333333" />
+>     </marker>
+>   </defs>
+>   <text x="400" y="40" style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #111111; text-anchor: middle;">Bresenham 改进算法2演示: 纯整数标量运算 [整型判别式 E]</text>
+>   <line x1="230" y1="160" x2="230" y2="480" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="310" y1="160" x2="310" y2="480" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="390" y1="160" x2="390" y2="480" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="470" y1="160" x2="470" y2="480" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="550" y1="160" x2="550" y2="480" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="630" y1="160" x2="630" y2="480" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="150" y1="400" x2="630" y2="400" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="150" y1="320" x2="630" y2="320" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="150" y1="240" x2="630" y2="240" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="150" y1="160" x2="630" y2="160" style="stroke: #e0e0e0; stroke-width: 1;" />
+>   <line x1="150" y1="440" x2="630" y2="440" style="stroke: #e91e63; stroke-width: 2;" />
+>   <line x1="150" y1="360" x2="630" y2="360" style="stroke: #e91e63; stroke-width: 2;" />
+>   <text x="640" y="444" style="font-family: Arial; font-size: 12px; fill: #e91e63; font-weight: bold;">E = 0 整数分界轴</text>
+>   <text x="640" y="364" style="font-family: Arial; font-size: 12px; fill: #e91e63; font-weight: bold;">E = 0 整数分界轴</text>
+>   <line x1="150" y1="480" x2="550" y2="320" style="stroke: #ff9900; stroke-width: 3.5; stroke-dasharray: 6,4;" />
+>   <rect x="110" y="440" width="80" height="80" style="fill: #fce4ec; fill-opacity: 0.5; stroke: #e91e63; stroke-width: 1;" />
+>   <rect x="190" y="440" width="80" height="80" style="fill: #fce4ec; fill-opacity: 0.5; stroke: #e91e63; stroke-width: 1;" />
+>   <rect x="270" y="360" width="80" height="80" style="fill: #fce4ec; fill-opacity: 0.5; stroke: #e91e63; stroke-width: 1;" />
+>   <rect x="350" y="360" width="80" height="80" style="fill: #fce4ec; fill-opacity: 0.5; stroke: #e91e63; stroke-width: 1;" />
+>   <rect x="430" y="280" width="80" height="80" style="fill: #fce4ec; fill-opacity: 0.5; stroke: #e91e63; stroke-width: 1;" />
+>   <rect x="510" y="280" width="80" height="80" style="fill: #fce4ec; fill-opacity: 0.5; stroke: #e91e63; stroke-width: 1;" />
+>   <circle cx="150" cy="480" r="6" style="fill: #e91e63; stroke: #ffffff; stroke-width: 2;" />
+>   <circle cx="230" cy="480" r="6" style="fill: #e91e63; stroke: #ffffff; stroke-width: 2;" />
+>   <circle cx="310" cy="400" r="6" style="fill: #e91e63; stroke: #ffffff; stroke-width: 2;" />
+>   <circle cx="390" cy="400" r="6" style="fill: #e91e63; stroke: #ffffff; stroke-width: 2;" />
+>   <circle cx="470" cy="320" r="6" style="fill: #e91e63; stroke: #ffffff; stroke-width: 2;" />
+>   <circle cx="550" cy="320" r="6" style="fill: #e91e63; stroke: #ffffff; stroke-width: 2;" />
+>   <text x="150" y="505" style="font-family: Arial; font-size: 11px; font-weight: bold; fill: #444444; text-anchor: middle;">(0,0) E0=-5</text>
+>   <text x="230" y="505" style="font-family: Arial; font-size: 11px; font-weight: bold; fill: #444444; text-anchor: middle;">(1,0) E1=-1</text>
+>   <text x="310" y="425" style="font-family: Arial; font-size: 11px; font-weight: bold; fill: #444444; text-anchor: middle;">(2,1) E2=3</text>
+>   <text x="390" y="425" style="font-family: Arial; font-size: 11px; font-weight: bold; fill: #444444; text-anchor: middle;">(3,1) E3=-3</text>
+>   <text x="470" y="345" style="font-family: Arial; font-size: 11px; font-weight: bold; fill: #444444; text-anchor: middle;">(4,2) E4=1</text>
+>   <text x="550" y="345" style="font-family: Arial; font-size: 11px; font-weight: bold; fill: #444444; text-anchor: middle;">(5,2) E5=-5</text>
+>   <line x1="100" y1="480" x2="680" y2="480" style="stroke: #333333; stroke-width: 2;" marker-end="url(#arrow)" />
+>   <line x1="150" y1="520" x2="150" y2="120" style="stroke: #333333; stroke-width: 2;" marker-end="url(#arrow)" />
+>   <text x="675" y="505" style="font-family: Arial; font-size: 16px; font-weight: bold; font-style: italic; fill: #333333;">X</text>
+>   <text x="130" y="130" style="font-family: Arial; font-size: 16px; font-weight: bold; font-style: italic; fill: #333333;">Y</text>
+>   <text x="150" y="530" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">0</text>
+>   <text x="230" y="530" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">1</text>
+>   <text x="310" y="530" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">2</text>
+>   <text x="390" y="530" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">3</text>
+>   <text x="470" y="530" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">4</text>
+>   <text x="550" y="530" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">5</text>
+>   <text x="125" y="405" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">1</text>
+>   <text x="125" y="325" style="font-family: Arial; font-size: 14px; fill: #333333; text-anchor: middle;">2</text>
+>   <g transform="translate(140, 75)">
+>     <rect x="0" y="0" width="520" height="40" style="fill: #f9f9f9; stroke: #dddddd; stroke-width: 1; rx: 4;" />
+>     <line x1="15" y1="20" x2="45" y2="20" style="stroke: #ff9900; stroke-width: 3; stroke-dasharray: 4,3;" />
+>     <text x="55" y="24" style="font-family: Arial; font-size: 12px; fill: #333333;">理想直线</text>
+>     <line x1="140" y1="20" x2="170" y2="20" style="stroke: #e91e63; stroke-width: 2;" />
+>     <text x="180" y="24" style="font-family: Arial; font-size: 12px; fill: #333333;">E = 0 整数分界轴</text>
+>     <rect x="315" y="12" width="16" height="16" style="fill: #fce4ec; stroke: #e91e63; stroke-width: 1;" />
+>     <text x="340" y="24" style="font-family: Arial; font-size: 12px; fill: #333333;">纯整型硬件渲染点</text>
+>   </g>
+> </svg>
+> </div>
+>
 > - **初始化**：通过 $E = e \cdot 2\Delta x$ 进行整体放大，已知 $2\Delta x = 10$ 且 $2\Delta y = 4$。
->   初始整型决策误差量 $E_0 = -\Delta x = -5$。
 > - **状态更新规则**：
 >   - 每次步进累加 $2\Delta y$ 即计算临时值 $E_{\text{temp}} = E_i + 4$。
 >   - 若 $E_{\text{temp}} \ge 0 \implies y$ 递增 $1$，且做整型修正 $E_{i+1} = E_{\text{temp}} - 2\Delta x$（即减去 $10$）。
@@ -459,6 +607,7 @@
 > $$
 > (0,0) \to (1,0) \to (2,1) \to (3,1) \to (4,2) \to (5,2)
 > $$
+
 
 ---
 
