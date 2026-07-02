@@ -774,6 +774,35 @@
   -----|------|-----
   0101 | 0100 | 0110
   ```
+
+  <div align="center">
+  <svg viewBox="0 0 350 250" width="100%" style="background-color: #ffffff; max-width: 400px; display: block; margin: auto;">
+    <!-- Grid extension lines -->
+    <line x1="125" y1="10" x2="125" y2="240" stroke="#ddd" stroke-width="1.5" stroke-dasharray="3 3" />
+    <line x1="225" y1="10" x2="225" y2="240" stroke="#ddd" stroke-width="1.5" stroke-dasharray="3 3" />
+    <line x1="10" y1="75" x2="340" y2="75" stroke="#ddd" stroke-width="1.5" stroke-dasharray="3 3" />
+    <line x1="10" y1="175" x2="340" y2="175" stroke="#ddd" stroke-width="1.5" stroke-dasharray="3 3" />
+    
+    <!-- Clipping Window -->
+    <rect x="125" y="75" width="100" height="100" fill="rgba(103, 194, 58, 0.1)" stroke="#67C23A" stroke-width="2.5" />
+    <text x="175" y="128" font-family="sans-serif" font-size="11" font-weight="bold" fill="#67C23A" text-anchor="middle">窗口 (0000)</text>
+    
+    <!-- 9-Region Codes -->
+    <text x="75" y="50" font-family="sans-serif" font-size="14" font-weight="bold" fill="#409EFF" text-anchor="middle">1001</text>
+    <text x="175" y="50" font-family="sans-serif" font-size="14" font-weight="bold" fill="#333" text-anchor="middle">1000</text>
+    <text x="275" y="50" font-family="sans-serif" font-size="14" font-weight="bold" fill="#409EFF" text-anchor="middle">1010</text>
+    
+    <text x="75" y="130" font-family="sans-serif" font-size="14" font-weight="bold" fill="#333" text-anchor="middle">0001</text>
+    <text x="275" y="130" font-family="sans-serif" font-size="14" font-weight="bold" fill="#333" text-anchor="middle">0010</text>
+    
+    <text x="75" y="210" font-family="sans-serif" font-size="14" font-weight="bold" fill="#409EFF" text-anchor="middle">0101</text>
+    <text x="175" y="210" font-family="sans-serif" font-size="14" font-weight="bold" fill="#333" text-anchor="middle">0100</text>
+    <text x="275" y="210" font-family="sans-serif" font-size="14" font-weight="bold" fill="#409EFF" text-anchor="middle">0110</text>
+
+    <text x="10" y="245" font-family="sans-serif" font-size="9" fill="#999">编码规则: [上(T) 下(B) 右(R) 左(L)]</text>
+  </svg>
+  </div>
+
 * **算法执行过程**：
 
   1. 计算直线段两端点 $P_1, P_2$ 的编码 $code_1, code_2$。
@@ -1579,6 +1608,49 @@ graph TD
 $$
 I = I_e + I_d + I_s = I_a K_a + I_p K_d (L \cdot N) + I_p K_s (H \cdot N)^n
 $$
+
+<div align="center">
+<svg viewBox="0 0 320 180" width="100%" style="background-color: #ffffff; max-width: 350px; display: block; margin: auto;">
+  <defs>
+    <marker id="arrow-vector" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#333" />
+    </marker>
+    <marker id="arrow-vector-h" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#409EFF" />
+    </marker>
+  </defs>
+  <!-- Surface line -->
+  <line x1="20" y1="150" x2="300" y2="150" stroke="#666" stroke-width="2" />
+  <rect x="20" y="150" width="280" height="20" fill="rgba(240,240,240,0.5)" />
+  
+  <!-- Surface point P -->
+  <circle cx="150" cy="150" r="3" fill="#333" />
+  <text x="145" y="165" font-family="sans-serif" font-size="11" fill="#333">P</text>
+  
+  <!-- Normal Vector N -->
+  <line x1="150" y1="150" x2="150" y2="40" stroke="#333" stroke-width="2" marker-end="url(#arrow-vector)" />
+  <text x="145" y="28" font-family="sans-serif" font-size="12" font-weight="bold" fill="#333">N</text>
+  
+  <!-- Light Vector L -->
+  <line x1="150" y1="150" x2="70" y2="70" stroke="#333" stroke-width="2" marker-end="url(#arrow-vector)" />
+  <text x="55" y="68" font-family="sans-serif" font-size="12" font-weight="bold" fill="#333">L</text>
+  
+  <!-- Reflection Vector R -->
+  <line x1="150" y1="150" x2="230" y2="70" stroke="#999" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#arrow-vector)" />
+  <text x="235" y="68" font-family="sans-serif" font-size="12" fill="#999">R</text>
+  
+  <!-- View Vector V -->
+  <line x1="150" y1="150" x2="200" y2="55" stroke="#333" stroke-width="2" marker-end="url(#arrow-vector)" />
+  <text x="205" y="50" font-family="sans-serif" font-size="12" font-weight="bold" fill="#333">V</text>
+  
+  <!-- Halfway Vector H -->
+  <line x1="150" y1="150" x2="172" y2="48" stroke="#409EFF" stroke-width="2" marker-end="url(#arrow-vector-h)" />
+  <text x="178" y="42" font-family="sans-serif" font-size="12" font-weight="bold" fill="#409EFF">H</text>
+
+  <!-- Surface Normal Arc -->
+  <path d="M 130 150 A 20 20 0 0 1 150 130" fill="none" stroke="#ddd" stroke-width="1" />
+</svg>
+</div>
 
 * **公式中各分量及物理量含义**：
   - $I$：计算出的表面最终合成反射光强度。
