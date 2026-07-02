@@ -682,8 +682,95 @@
   - 从测试点 $P$ 向任意方向发射一条射线，计算该射线与多边形边界的交点个数。
   - 若交点个数为**奇数**，则点 $P$ 位于多边形内部；若为**偶数**，则位于外部。
   - *特例处理*：当射线恰好穿过顶点或切于边时，需进行退化判定（通常规定“左开右闭”或仅计算单向相交）。
+    *   **X-扫描线算法——顶点配对**：
+        当扫描线与多边形的顶点相交时：
+        - 若共享顶点的两条边分别落在扫描线的两边，交点只算一个；
+        - 若共享顶点的两条边在扫描线的同一边，这时交点作为两个；
+        - 对于多边形的水平边，不计它与扫描线的交点。
+        > **直观记忆口诀：**
+        > *   路过拐角（一上一下）： 算作 1 个交点。
+        > *   切到尖峰/谷底（同上同下）： 算作 2 个交点。
+        > *   切到水平躺平 the 边： 直接无视，算 0 个。
+        <div align="center">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="100%" height="100%" style="background-color: #ffffff;">
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#000000" />
+            </marker>
+          </defs>
+          <line x1="120" y1="40" x2="120" y2="520" stroke="#888888" stroke-width="0.5" />
+          <line x1="160" y1="40" x2="160" y2="520" stroke="#888888" stroke-width="0.5" />
+          <line x1="200" y1="40" x2="200" y2="520" stroke="#888888" stroke-width="0.5" />
+          <line x1="240" y1="40" x2="240" y2="520" stroke="#888888" stroke-width="0.5" />
+          <line x1="280" y1="40" x2="280" y2="520" stroke="#888888" stroke-width="0.5" />
+          <line x1="320" y1="40" x2="320" y2="520" stroke="#888888" stroke-width="0.5" />
+          <line x1="360" y1="40" x2="360" y2="520" stroke="#888888" stroke-width="0.5" />
+          <line x1="400" y1="40" x2="400" y2="520" stroke="#888888" stroke-width="0.5" />
+          <line x1="440" y1="40" x2="440" y2="520" stroke="#888888" stroke-width="0.5" />
+          <line x1="480" y1="40" x2="480" y2="520" stroke="#888888" stroke-width="0.5" />
+          <line x1="520" y1="40" x2="520" y2="520" stroke="#888888" stroke-width="0.5" />
+          <line x1="560" y1="40" x2="560" y2="520" stroke="#888888" stroke-width="0.5" />
+          <line x1="80" y1="480" x2="560" y2="480" stroke="#888888" stroke-width="0.5" />
+          <line x1="80" y1="440" x2="560" y2="440" stroke="#888888" stroke-width="0.5" />
+          <line x1="80" y1="400" x2="560" y2="400" stroke="#888888" stroke-width="0.5" />
+          <line x1="80" y1="360" x2="560" y2="360" stroke="#888888" stroke-width="0.5" />
+          <line x1="80" y1="320" x2="560" y2="320" stroke="#888888" stroke-width="0.5" />
+          <line x1="80" y1="280" x2="560" y2="280" stroke="#888888" stroke-width="0.5" />
+          <line x1="80" y1="240" x2="560" y2="240" stroke="#888888" stroke-width="0.5" />
+          <line x1="80" y1="200" x2="560" y2="200" stroke="#888888" stroke-width="0.5" />
+          <line x1="80" y1="160" x2="560" y2="160" stroke="#888888" stroke-width="0.5" />
+          <line x1="80" y1="120" x2="560" y2="120" stroke="#888888" stroke-width="0.5" />
+          <line x1="80" y1="80"  x2="560" y2="80"  stroke="#888888" stroke-width="0.5" />
+          <line x1="80" y1="40"  x2="560" y2="40"  stroke="#888888" stroke-width="0.5" />
+          <line x1="50" y1="480" x2="590" y2="480" stroke="#0000ff" stroke-width="3" />
+          <line x1="50" y1="320" x2="590" y2="320" stroke="#0000ff" stroke-width="3" />
+          <line x1="50" y1="240" x2="590" y2="240" stroke="#0000ff" stroke-width="3" />
+          <line x1="200" y1="480" x2="400" y2="480" stroke="#ff0000" stroke-width="5" stroke-linecap="round" />
+          <polygon points="120,240 200,40 360,200 560,160 400,480 320,320 200,480" stroke="#000000" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" />
+          <circle cx="120" cy="240" r="6" fill="#ff0000" stroke="#000000" stroke-width="2" />
+          <circle cx="320" cy="320" r="6" fill="#ff0000" stroke="#000000" stroke-width="2" />
+          <circle cx="200" cy="480" r="6" fill="#ff0000" stroke="#000000" stroke-width="2" />
+          <circle cx="400" cy="480" r="6" fill="#ff0000" stroke="#000000" stroke-width="2" />
+          <line x1="80" y1="520" x2="580" y2="520" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+          <line x1="80" y1="520" x2="80" y2="20" stroke="#000000" stroke-width="2" marker-end="url(#arrow)" />
+          <text x="575" y="545" font-family="sans-serif" font-size="18" font-weight="bold" font-style="italic" fill="#000000">x</text>
+          <text x="55" y="30" font-family="sans-serif" font-size="18" font-weight="bold" font-style="italic" fill="#000000">y</text>
+          <text x="120" y="545" font-family="sans-serif" font-size="16" fill="#000000" text-anchor="middle">1</text>
+          <text x="160" y="545" font-family="sans-serif" font-size="16" fill="#000000" text-anchor="middle">2</text>
+          <text x="200" y="545" font-family="sans-serif" font-size="16" fill="#000000" text-anchor="middle">3</text>
+          <text x="240" y="545" font-family="sans-serif" font-size="16" fill="#000000" text-anchor="middle">4</text>
+          <text x="280" y="545" font-family="sans-serif" font-size="16" fill="#000000" text-anchor="middle">5</text>
+          <text x="320" y="545" font-family="sans-serif" font-size="16" fill="#000000" text-anchor="middle">6</text>
+          <text x="360" y="545" font-family="sans-serif" font-size="16" fill="#000000" text-anchor="middle">7</text>
+          <text x="400" y="545" font-family="sans-serif" font-size="16" fill="#000000" text-anchor="middle">8</text>
+          <text x="440" y="545" font-family="sans-serif" font-size="16" fill="#000000" text-anchor="middle">9</text>
+          <text x="480" y="545" font-family="sans-serif" font-size="16" fill="#000000" text-anchor="middle">10</text>
+          <text x="520" y="545" font-family="sans-serif" font-size="16" fill="#000000" text-anchor="middle">11</text>
+          <text x="560" y="545" font-family="sans-serif" font-size="16" fill="#000000" text-anchor="middle">12</text>
+          <text x="60" y="485" font-family="sans-serif" font-size="16" fill="#000000" text-anchor="middle">1</text>
+          <text x="60" y="445" font-family="sans-serif" font-size="16" fill="#000000" text-anchor="middle">2</text>
+          <text x="60" y="405" font-family="sans-serif" font-size="16" fill="#000000" text-anchor="middle">3</text>
+          <text x="60" y="365" font-family="sans-serif" font-size="16" fill="#000000" text-anchor="middle">4</text>
+          <text x="60" y="325" font-family="sans-serif" font-size="16" fill="#000000" text-anchor="middle">5</text>
+          <text x="60" y="285" font-family="sans-serif" font-size="16" fill="#000000" text-anchor="middle">6</text>
+          <text x="60" y="245" font-family="sans-serif" font-size="16" fill="#000000" text-anchor="middle">7</text>
+          <text x="60" y="205" font-family="sans-serif" font-size="16" fill="#000000" text-anchor="middle">8</text>
+          <text x="60" y="165" font-family="sans-serif" font-size="16" fill="#000000" text-anchor="middle">9</text>
+          <text x="60" y="125" font-family="sans-serif" font-size="16" fill="#000000" text-anchor="middle">10</text>
+          <text x="60" y="85"  font-family="sans-serif" font-size="16" fill="#000000" text-anchor="middle">11</text>
+          <text x="60" y="45"  font-family="sans-serif" font-size="16" fill="#000000" text-anchor="middle">12</text>
+        </svg>
+        </div>
 * **环绕数/弧长法 (Winding Number Method)**：
   - 计算测试点 $P$ 沿多边形边界绕行一周时，边界边绕点 $P$ 的净旋转角之和。若旋转角之和非零，则点在内部。
+  > **环绕数/弧长法是怎么运作的？**
+  >
+  > 这个方法非常直观。想象你站在要测试的 P 点上，目光盯着多边形的边界，看着一个人沿着多边形边缘走完整整一圈。
+  >
+  > *   如果 P 点在外部：你的目光会跟着这个人来回摆动（比如先往左看30度，最后又往右看30度）。当他走回起点时，你目光转动的“净角度”（正负相互抵消后的代数和）将是 0度。
+  > *   如果 P 点在内部：因为你被边界包围了，为了看着他走完一圈，你自己必须原地转整整一个圈。也就是说，你目光旋转的代数和将是 2π（也就是360度）。
+  >
+  > 通过计算这个角度的总和是 0 还是 2π，就能精准判断点到底在外面还是里面。
 
 ---
 
@@ -703,6 +790,8 @@
     $$
 
     其中，$y_{\max}$ 是边的最大 $Y$ 坐标，$x_{\text{ymin}}$ 是边在最小 $Y$ 坐标处对应的 $X$ 值，$\Delta x$ 是边的斜率倒数（即 $\frac{1}{k}$）。
+  > [!TIP]
+  > 参数可能会出简答题
   - *注意*：若边水平（$\Delta y = 0$），则无需加入 ET 表。为了防止顶点处重复相交，若某边与邻边在顶点处单调递增或递减，需将上端点的高度算作 $y_{\max}-1$ 进行区间缩短。
 * **活动边表 (Active Edge Table, AET) 的创建与维护步骤**：
   - AET 表存储与当前扫描线相交的所有边，并按 $X$ 坐标从小到大排序。
