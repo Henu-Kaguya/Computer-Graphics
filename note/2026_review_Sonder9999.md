@@ -571,7 +571,7 @@
 > **【多边形网格示意图】**
 >
 > <div align="center">
-> <svg viewBox="0 0 400 350" width="100%" style="background-color: #ffffff; max-width: 500px; display: block; margin: auto;">
+> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 350" width="100%" style="background-color: #ffffff; max-width: 500px; display: block; margin: auto;">
 >   <defs>
 >     <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
 >       <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#f0f0f0" stroke-width="1"/>
@@ -776,29 +776,24 @@
   ```
 
   <div align="center">
-  <svg viewBox="0 0 350 250" width="100%" style="background-color: #ffffff; max-width: 400px; display: block; margin: auto;">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 250" width="100%" style="background-color: #ffffff; max-width: 400px; display: block; margin: auto;">
     <!-- Grid extension lines -->
     <line x1="125" y1="10" x2="125" y2="240" stroke="#ddd" stroke-width="1.5" stroke-dasharray="3 3" />
     <line x1="225" y1="10" x2="225" y2="240" stroke="#ddd" stroke-width="1.5" stroke-dasharray="3 3" />
     <line x1="10" y1="75" x2="340" y2="75" stroke="#ddd" stroke-width="1.5" stroke-dasharray="3 3" />
     <line x1="10" y1="175" x2="340" y2="175" stroke="#ddd" stroke-width="1.5" stroke-dasharray="3 3" />
-    
     <!-- Clipping Window -->
     <rect x="125" y="75" width="100" height="100" fill="rgba(103, 194, 58, 0.1)" stroke="#67C23A" stroke-width="2.5" />
     <text x="175" y="128" font-family="sans-serif" font-size="11" font-weight="bold" fill="#67C23A" text-anchor="middle">窗口 (0000)</text>
-    
     <!-- 9-Region Codes -->
     <text x="75" y="50" font-family="sans-serif" font-size="14" font-weight="bold" fill="#409EFF" text-anchor="middle">1001</text>
     <text x="175" y="50" font-family="sans-serif" font-size="14" font-weight="bold" fill="#333" text-anchor="middle">1000</text>
     <text x="275" y="50" font-family="sans-serif" font-size="14" font-weight="bold" fill="#409EFF" text-anchor="middle">1010</text>
-    
     <text x="75" y="130" font-family="sans-serif" font-size="14" font-weight="bold" fill="#333" text-anchor="middle">0001</text>
     <text x="275" y="130" font-family="sans-serif" font-size="14" font-weight="bold" fill="#333" text-anchor="middle">0010</text>
-    
     <text x="75" y="210" font-family="sans-serif" font-size="14" font-weight="bold" fill="#409EFF" text-anchor="middle">0101</text>
     <text x="175" y="210" font-family="sans-serif" font-size="14" font-weight="bold" fill="#333" text-anchor="middle">0100</text>
     <text x="275" y="210" font-family="sans-serif" font-size="14" font-weight="bold" fill="#409EFF" text-anchor="middle">0110</text>
-
     <text x="10" y="245" font-family="sans-serif" font-size="9" fill="#999">编码规则: [上(T) 下(B) 右(R) 左(L)]</text>
   </svg>
   </div>
@@ -853,7 +848,7 @@
 > **【裁剪几何示意图】**
 >
 > <div align="center">
-> <svg viewBox="0 0 350 350" width="100%" style="background-color: #ffffff; max-width: 450px; display: block; margin: auto;">
+> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 350" width="100%" style="background-color: #ffffff; max-width: 450px; display: block; margin: auto;">
 >   <defs>
 >     <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
 >       <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#f0f0f0" stroke-width="1"/>
@@ -1001,7 +996,7 @@
 
 * **基本思想**：采用**分治法**和**逐边裁剪**思想。把多边形裁剪问题分解为用裁剪窗口的单条边界依次对输入的多边形顶点序列进行裁剪，每一次处理完的输出顶点序列，将作为下一次裁剪的输入顶点序列，具有流式流水线处理的特征。
 * **边界求交的输入与输出判定 (顶点 $S \to P$)**：
-  
+
   | 边与顶点的相对位置关系 | 是否输出交点 $I$ | 是否输出终点 $P$ |
   | :--- | :---: | :---: |
   | **S 内 $\to$ P 内** | 否 | 是 (输出 $P$) |
@@ -1116,7 +1111,7 @@ $$
 ### 1. 二维基本齐次变换矩阵 ($3 \times 3$)
 
 * **平移变换 (Translation)**：
-  
+
   $$
   T(t_x, t_y) = \begin{bmatrix}
   1 & 0 & t_x \\
@@ -1124,9 +1119,9 @@ $$
   0 & 0 & 1
   \end{bmatrix}
   $$
-  
+
 * **比例缩放 (Scaling)**：
-  
+
   $$
   S(s_x, s_y) = \begin{bmatrix}
   s_x & 0 & 0 \\
@@ -1134,9 +1129,9 @@ $$
   0 & 0 & 1
   \end{bmatrix}
   $$
-  
+
 * **旋转变换 (Rotation，绕原点逆时针旋转角度 $\theta$)**：
-  
+
   $$
   R(\theta) = \begin{bmatrix}
   \cos\theta & -\sin\theta & 0 \\
@@ -1144,10 +1139,10 @@ $$
   0 & 0 & 1
   \end{bmatrix}
   $$
-  
+
 * **对称反射变换 (Reflection)**：
   - **关于 $X$ 轴反射**：
-    
+
     $$
     M_x = \begin{bmatrix}
     1 & 0 & 0 \\
@@ -1155,9 +1150,9 @@ $$
     0 & 0 & 1
     \end{bmatrix}
     $$
-    
+
   - **关于 $Y$ 轴反射**：
-    
+
     $$
     M_y = \begin{bmatrix}
     -1 & 0 & 0 \\
@@ -1165,9 +1160,9 @@ $$
     0 & 0 & 1
     \end{bmatrix}
     $$
-    
+
   - **关于原点对称反射**：
-    
+
     $$
     M_{\text{origin}} = \begin{bmatrix}
     -1 & 0 & 0 \\
@@ -1175,9 +1170,9 @@ $$
     0 & 0 & 1
     \end{bmatrix}
     $$
-    
+
   - **关于直线 $y=x$ 反射**：
-    
+
     $$
     M_{y=x} = \begin{bmatrix}
     0 & 1 & 0 \\
@@ -1185,9 +1180,9 @@ $$
     0 & 0 & 1
     \end{bmatrix}
     $$
-    
+
   - **关于直线 $y=-x$ 反射**：
-    
+
     $$
     M_{y=-x} = \begin{bmatrix}
     0 & -1 & 0 \\
@@ -1195,10 +1190,10 @@ $$
     0 & 0 & 1
     \end{bmatrix}
     $$
-    
+
 * **错切变换 (Shear)**：
   - **沿 $X$ 方向错切**：
-    
+
     $$
     SH_x(sh_x) = \begin{bmatrix}
     1 & sh_x & 0 \\
@@ -1206,9 +1201,9 @@ $$
     0 & 0 & 1
     \end{bmatrix}
     $$
-    
+
   - **沿 $Y$ 方向错切**：
-    
+
     $$
     SH_y(sh_y) = \begin{bmatrix}
     1 & 0 & 0 \\
@@ -1216,14 +1211,14 @@ $$
     0 & 0 & 1
     \end{bmatrix}
     $$
-    
+
 
 ---
 
 ### 2. 三维基本齐次变换矩阵 ($4 \times 4$)
 
 * **平移变换**：
-  
+
   $$
   T(t_x, t_y, t_z) = \begin{bmatrix}
   1 & 0 & 0 & t_x \\
@@ -1232,9 +1227,9 @@ $$
   0 & 0 & 0 & 1
   \end{bmatrix}
   $$
-  
+
 * **比例缩放**：
-  
+
   $$
   S(s_x, s_y, s_z) = \begin{bmatrix}
   s_x & 0 & 0 & 0 \\
@@ -1243,10 +1238,10 @@ $$
   0 & 0 & 0 & 1
   \end{bmatrix}
   $$
-  
+
 * **绕三个主坐标轴的旋转矩阵**：
   - **绕 Z 轴旋转 $\theta$**：
-    
+
     $$
     R_z(\theta) = \begin{bmatrix}
     \cos\theta & -\sin\theta & 0 & 0 \\
@@ -1255,9 +1250,9 @@ $$
     0 & 0 & 0 & 1
     \end{bmatrix}
     $$
-    
+
   - **绕 X 轴旋转 $\theta$**：
-    
+
     $$
     R_x(\theta) = \begin{bmatrix}
     1 & 0 & 0 & 0 \\
@@ -1266,9 +1261,9 @@ $$
     0 & 0 & 0 & 1
     \end{bmatrix}
     $$
-    
+
   - **绕 Y 轴旋转 $\theta$**：
-    
+
     $$
     R_y(\theta) = \begin{bmatrix}
     \cos\theta & 0 & \sin\theta & 0 \\
@@ -1277,10 +1272,10 @@ $$
     0 & 0 & 0 & 1
     \end{bmatrix}
     $$
-    
+
 * **对称反射变换 (Reflection)**：
   - **关于 $XY$ 平面反射 ($z \to -z$)**：
-    
+
     $$
     M_{xy} = \begin{bmatrix}
     1 & 0 & 0 & 0 \\
@@ -1289,9 +1284,9 @@ $$
     0 & 0 & 0 & 1
     \end{bmatrix}
     $$
-    
+
   - **关于 $YZ$ 平面反射 ($x \to -x$)**：
-    
+
     $$
     M_{yz} = \begin{bmatrix}
     -1 & 0 & 0 & 0 \\
@@ -1300,9 +1295,9 @@ $$
     0 & 0 & 0 & 1
     \end{bmatrix}
     $$
-    
+
   - **关于 $ZX$ 平面反射 ($y \to -y$)**：
-    
+
     $$
     M_{zx} = \begin{bmatrix}
     1 & 0 & 0 & 0 \\
@@ -1311,10 +1306,10 @@ $$
     0 & 0 & 0 & 1
     \end{bmatrix}
     $$
-    
+
 * **错切变换 (Shear，以沿 Z 轴错切为例)**：
   - 错切量由 $Z$ 坐标的大小决定，使 $X, Y$ 坐标发生线性错切偏移：
-    
+
     $$
     SH_z(sh_x, sh_y) = \begin{bmatrix}
     1 & 0 & sh_x & 0 \\
@@ -1359,22 +1354,22 @@ $$
 * **全局固定坐标模式 (Global Coordinate Mode / Left Multi-multiplication)**：
   - **视点**：所有的空间变换（平移、旋转、缩放）都是相对于绝对的、静止的“世界坐标系”进行。
   - **数学运算顺序**：采用矩阵**左乘模式**。若变换步骤为：先进行 $A$，再进行 $B$，则最终的变换矩阵连乘积为：
-    
+
     $$
     M = B \cdot A
     $$
-    
+
     即新矩阵左乘到累积矩阵链上，最先执行的变换 $A$ 紧贴在被乘的顶点向量 $v$ 左侧：$M \cdot v = B \cdot (A \cdot v)$。
 * **活动局部坐标模式 (Local Coordinate Mode / Right Multi-multiplication)**：
   - **视点**：每一次空间变换都是相对于上一次变换后产生的新物体的“活动局部坐标系”进行（即坐标轴会随着变换一起运动）。
   - **数学运算顺序**：采用矩阵**右乘模式**。若变换步骤为：先进行 $A$，再进行 $B$，则最终的变换矩阵连乘积为：
-    
+
     $$
     M = A \cdot B
     $$
-    
+
     即新矩阵右乘到累积矩阵链上，先写的变换矩阵反而被置于左侧，顶点的最终计算形式依然是：$M \cdot v = A \cdot (B \cdot v)$，这在数学上等价于在世界坐标系下先执行 $B$，再执行 $A$。
-  
+
   > [!NOTE]
   > **重要考点：OpenGL 中的变换顺序与代码书写顺序**
   > - OpenGL 采用的是**活动局部坐标系模式（右乘）**。
@@ -1610,7 +1605,7 @@ I = I_e + I_d + I_s = I_a K_a + I_p K_d (L \cdot N) + I_p K_s (H \cdot N)^n
 $$
 
 <div align="center">
-<svg viewBox="0 0 320 180" width="100%" style="background-color: #ffffff; max-width: 350px; display: block; margin: auto;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" width="100%" style="background-color: #ffffff; max-width: 350px; display: block; margin: auto;">
   <defs>
     <marker id="arrow-vector" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
       <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#333" />
@@ -1622,31 +1617,24 @@ $$
   <!-- Surface line -->
   <line x1="20" y1="150" x2="300" y2="150" stroke="#666" stroke-width="2" />
   <rect x="20" y="150" width="280" height="20" fill="rgba(240,240,240,0.5)" />
-  
   <!-- Surface point P -->
   <circle cx="150" cy="150" r="3" fill="#333" />
   <text x="145" y="165" font-family="sans-serif" font-size="11" fill="#333">P</text>
-  
   <!-- Normal Vector N -->
   <line x1="150" y1="150" x2="150" y2="40" stroke="#333" stroke-width="2" marker-end="url(#arrow-vector)" />
   <text x="145" y="28" font-family="sans-serif" font-size="12" font-weight="bold" fill="#333">N</text>
-  
   <!-- Light Vector L -->
   <line x1="150" y1="150" x2="70" y2="70" stroke="#333" stroke-width="2" marker-end="url(#arrow-vector)" />
   <text x="55" y="68" font-family="sans-serif" font-size="12" font-weight="bold" fill="#333">L</text>
-  
   <!-- Reflection Vector R -->
   <line x1="150" y1="150" x2="230" y2="70" stroke="#999" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#arrow-vector)" />
   <text x="235" y="68" font-family="sans-serif" font-size="12" fill="#999">R</text>
-  
   <!-- View Vector V -->
   <line x1="150" y1="150" x2="200" y2="55" stroke="#333" stroke-width="2" marker-end="url(#arrow-vector)" />
   <text x="205" y="50" font-family="sans-serif" font-size="12" font-weight="bold" fill="#333">V</text>
-  
   <!-- Halfway Vector H -->
   <line x1="150" y1="150" x2="172" y2="48" stroke="#409EFF" stroke-width="2" marker-end="url(#arrow-vector-h)" />
   <text x="178" y="42" font-family="sans-serif" font-size="12" font-weight="bold" fill="#409EFF">H</text>
-
   <!-- Surface Normal Arc -->
   <path d="M 130 150 A 20 20 0 0 1 150 130" fill="none" stroke="#ddd" stroke-width="1" />
 </svg>
@@ -1803,14 +1791,14 @@ $$
     drawPolygon();                       // 绘制几何体
     ```
   - **矩阵相乘顺序**（从左到右）：
-    
+
     $$
     M = I \cdot R_A \cdot T_B \cdot S_C
     $$
-    
+
   - **几何物体顶点的实际生效顺序**：**从下到上（从右向左）**。
     也就是：**先进行缩放 C $\to$ 再进行平移 B $\to$ 最后进行旋转 A**。
-  
+
   > [!WARNING]
   > **避坑警示**：考试选择题往往会给出一段 OpenGL 几何变换的顺序代码，问其等价的几何操作流程。请记住核心规则：**代码里写在下方的变换最先作用于物体顶点，写在最上方的变换最后作用。**
 
