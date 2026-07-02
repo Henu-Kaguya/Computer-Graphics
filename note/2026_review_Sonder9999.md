@@ -348,6 +348,49 @@
 >
 > 已知起点为 $(0,0)$，终点为 $(5,2)$，则：
 >
+> <div align="center">
+> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 280" width="100%" style="background-color: #ffffff; max-width: 450px; display: block; margin: auto;">
+>   <defs>
+>     <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+>       <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#f0f0f0" stroke-width="1"/>
+>     </pattern>
+>     <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+>       <path d="M 0 0 L 10 5 L 0 10 z" fill="#333" />
+>     </marker>
+>   </defs>
+>   <rect width="100%" height="100%" fill="url(#grid)" />
+>   <rect x="35" y="235" width="30" height="30" rx="4" fill="rgba(64, 158, 255, 0.2)" stroke="#409EFF" stroke-width="1.5" />
+>   <rect x="85" y="235" width="30" height="30" rx="4" fill="rgba(64, 158, 255, 0.2)" stroke="#409EFF" stroke-width="1.5" />
+>   <rect x="135" y="185" width="30" height="30" rx="4" fill="rgba(64, 158, 255, 0.2)" stroke="#409EFF" stroke-width="1.5" />
+>   <rect x="185" y="185" width="30" height="30" rx="4" fill="rgba(64, 158, 255, 0.2)" stroke="#409EFF" stroke-width="1.5" />
+>   <rect x="235" y="135" width="30" height="30" rx="4" fill="rgba(64, 158, 255, 0.2)" stroke="#409EFF" stroke-width="1.5" />
+>   <rect x="285" y="135" width="30" height="30" rx="4" fill="rgba(64, 158, 255, 0.2)" stroke="#409EFF" stroke-width="1.5" />
+>   <line x1="30" y1="250" x2="350" y2="250" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)" />
+>   <line x1="50" y1="270" x2="50" y2="30" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)" />
+>   <text x="345" y="265" font-family="sans-serif" font-size="12" fill="#333">x</text>
+>   <text x="35" y="35" font-family="sans-serif" font-size="12" fill="#333">y</text>
+>   <text x="38" y="265" font-family="sans-serif" font-size="11" fill="#666">0</text>
+>   <line x1="100" y1="250" x2="100" y2="254" stroke="#333" /><text x="97" y="266" font-family="sans-serif" font-size="10" fill="#666">1</text>
+>   <line x1="150" y1="250" x2="150" y2="254" stroke="#333" /><text x="147" y="266" font-family="sans-serif" font-size="10" fill="#666">2</text>
+>   <line x1="200" y1="250" x2="200" y2="254" stroke="#333" /><text x="197" y="266" font-family="sans-serif" font-size="10" fill="#666">3</text>
+>   <line x1="250" y1="250" x2="250" y2="254" stroke="#333" /><text x="247" y="266" font-family="sans-serif" font-size="10" fill="#666">4</text>
+>   <line x1="300" y1="250" x2="300" y2="254" stroke="#333" /><text x="297" y="266" font-family="sans-serif" font-size="10" fill="#666">5</text>
+>   <line x1="46" y1="200" x2="50" y2="200" stroke="#333" /><text x="34" y="204" font-family="sans-serif" font-size="10" fill="#666">1</text>
+>   <line x1="46" y1="150" x2="50" y2="150" stroke="#333" /><text x="34" y="154" font-family="sans-serif" font-size="10" fill="#666">2</text>
+>   <line x1="50" y1="250" x2="300" y2="150" stroke="#F56C6C" stroke-width="2" stroke-dasharray="4 3" /
+>   <circle cx="50" cy="250" r="4" fill="#409EFF" />
+>   <circle cx="100" cy="250" r="4" fill="#409EFF" />
+>   <circle cx="150" cy="200" r="4" fill="#409EFF" />
+>   <circle cx="200" cy="200" r="4" fill="#409EFF" />
+>   <circle cx="250" cy="150" r="4" fill="#409EFF" />
+>   <circle cx="300" cy="150" r="4" fill="#409EFF" />
+>   <circle cx="50" cy="250" r="5" fill="#F56C6C" />
+>   <circle cx="300" cy="150" r="5" fill="#F56C6C" />
+>   <text x="45" y="225" font-family="sans-serif" font-size="11" font-weight="bold" fill="#F56C6C">P0(0,0)</text>
+>   <text x="290" y="130" font-family="sans-serif" font-size="11" font-weight="bold" fill="#F56C6C">P1(5,2)</text>
+> </svg>
+> </div>
+>
 > - $\Delta x = 5$ 且 $\Delta y = 2$
 > - 斜率 $k = \frac{2}{5} = 0.4$
 > - 终点像素为 $(5,2)$，需要在每一方向步进中决定下一个像素坐标。
@@ -440,6 +483,49 @@
 > **经典实例演练：使用中点画线法绘制从 $P_0(0,0)$ 到 $P_1(5,2)$ 的直线段**
 >
 > 已知起点为 $(0,0)$，终点为 $(5,2)$，则：
+>
+> <div align="center">
+> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 280" width="100%" style="background-color: #ffffff; max-width: 450px; display: block; margin: auto;">
+>   <defs>
+>     <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+>       <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#f0f0f0" stroke-width="1"/>
+>     </pattern>
+>     <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+>       <path d="M 0 0 L 10 5 L 0 10 z" fill="#333" />
+>     </marker>
+>   </defs>
+>   <rect width="100%" height="100%" fill="url(#grid)" />
+>   <rect x="35" y="235" width="30" height="30" rx="4" fill="rgba(64, 158, 255, 0.2)" stroke="#409EFF" stroke-width="1.5" />
+>   <rect x="85" y="235" width="30" height="30" rx="4" fill="rgba(64, 158, 255, 0.2)" stroke="#409EFF" stroke-width="1.5" />
+>   <rect x="135" y="185" width="30" height="30" rx="4" fill="rgba(64, 158, 255, 0.2)" stroke="#409EFF" stroke-width="1.5" />
+>   <rect x="185" y="185" width="30" height="30" rx="4" fill="rgba(64, 158, 255, 0.2)" stroke="#409EFF" stroke-width="1.5" />
+>   <rect x="235" y="135" width="30" height="30" rx="4" fill="rgba(64, 158, 255, 0.2)" stroke="#409EFF" stroke-width="1.5" />
+>   <rect x="285" y="135" width="30" height="30" rx="4" fill="rgba(64, 158, 255, 0.2)" stroke="#409EFF" stroke-width="1.5" />
+>   <line x1="30" y1="250" x2="350" y2="250" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)" />
+>   <line x1="50" y1="270" x2="50" y2="30" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)" />
+>   <text x="345" y="265" font-family="sans-serif" font-size="12" fill="#333">x</text>
+>   <text x="35" y="35" font-family="sans-serif" font-size="12" fill="#333">y</text>
+>   <text x="38" y="265" font-family="sans-serif" font-size="11" fill="#666">0</text>
+>   <line x1="100" y1="250" x2="100" y2="254" stroke="#333" /><text x="97" y="266" font-family="sans-serif" font-size="10" fill="#666">1</text>
+>   <line x1="150" y1="250" x2="150" y2="254" stroke="#333" /><text x="147" y="266" font-family="sans-serif" font-size="10" fill="#666">2</text>
+>   <line x1="200" y1="250" x2="200" y2="254" stroke="#333" /><text x="197" y="266" font-family="sans-serif" font-size="10" fill="#666">3</text>
+>   <line x1="250" y1="250" x2="250" y2="254" stroke="#333" /><text x="247" y="266" font-family="sans-serif" font-size="10" fill="#666">4</text>
+>   <line x1="300" y1="250" x2="300" y2="254" stroke="#333" /><text x="297" y="266" font-family="sans-serif" font-size="10" fill="#666">5</text>
+>   <line x1="46" y1="200" x2="50" y2="200" stroke="#333" /><text x="34" y="204" font-family="sans-serif" font-size="10" fill="#666">1</text>
+>   <line x1="46" y1="150" x2="50" y2="150" stroke="#333" /><text x="34" y="154" font-family="sans-serif" font-size="10" fill="#666">2</text>
+>   <line x1="50" y1="250" x2="300" y2="150" stroke="#F56C6C" stroke-width="2" stroke-dasharray="4 3" /
+>   <circle cx="50" cy="250" r="4" fill="#409EFF" />
+>   <circle cx="100" cy="250" r="4" fill="#409EFF" />
+>   <circle cx="150" cy="200" r="4" fill="#409EFF" />
+>   <circle cx="200" cy="200" r="4" fill="#409EFF" />
+>   <circle cx="250" cy="150" r="4" fill="#409EFF" />
+>   <circle cx="300" cy="150" r="4" fill="#409EFF" />
+>   <circle cx="50" cy="250" r="5" fill="#F56C6C" />
+>   <circle cx="300" cy="150" r="5" fill="#F56C6C" />
+>   <text x="45" y="225" font-family="sans-serif" font-size="11" font-weight="bold" fill="#F56C6C">P0(0,0)</text>
+>   <text x="290" y="130" font-family="sans-serif" font-size="11" font-weight="bold" fill="#F56C6C">P1(5,2)</text>
+> </svg>
+> </div>
 >
 > - $\Delta x = 5$ 且 $\Delta y = 2$
 > - 斜率 $k = \frac{2}{5} = 0.4$
