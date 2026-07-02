@@ -1583,15 +1583,26 @@ l & m & s
 \end{array} \right]
 $$
 
-- **左上角 $2 \times 2$ 矩阵 $\begin{bmatrix} a & b \\ c & d \end{bmatrix}$（线性变换项）**：
-  - 控制二维空间中的**旋转、缩放、反射对称和错切**。
-  - 对角线上的 $a, d$ 分别表示 $X, Y$ 方向的缩放比例；非对角线上的 $b, c$ 控制错切与旋转。
-- **右上角 $2 \times 1$ 向量 $\begin{bmatrix} p_x \\ p_y \end{bmatrix}$（平移变换项）**：
-  - 控制图形沿 $X, Y$ 方向的**平移量**（在坐标 $w=1$ 下，平移分量直接累加）。
-- **左下角 $1 \times 2$ 向量 $\begin{bmatrix} l & m \end{bmatrix}$（透视投影项）**：
-  - 控制二维空间中的**透视投影变换**，使平行线在投影后产生交点（灭点）。
-- **右下角 $1 \times 1$ 标量 $[s]$（全局比例因子）**：
-  - 控制图形的**全局统一等比例缩放**。在进行齐次坐标归一化时，所有坐标都将除以 $s$，从而使物体尺寸变为原来的 $\frac{1}{s}$。
+* **左上角 $2 \times 2$ 矩阵 $\begin{bmatrix} a & b \\ c & d \end{bmatrix}$（线性变换项）**：
+  * 控制二维空间中的**旋转、缩放、反射对称和错切**。
+  * **比例缩放 (Scaling)**：由对角线上的元素 $a, d$ 控制。
+    * **拉伸/放大**：若 $a > 1$（或 $d > 1$），则沿 $X$ 轴（或 $Y$ 轴）方向放大。
+    * **压缩/缩小**：若 $0 < a < 1$（或 $0 < d < 1$），则在对应轴方向上缩小。
+    * **无缩放**：当 $a = 1, d = 1$ 时。
+    * **反射/对称镜像 (Mirror Reflection)**：若对角线元素为负数。例如，若 $a = -1, d = 1$，则图形关于 $Y$ 轴反射对称；若 $a = 1, d = -1$，关于 $X$ 轴对称；若 $a = -1, d = -1$，关于原点对称。
+  * **旋转 (Rotation)**：当矩阵表现为 $\begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{bmatrix}$ 时，代表绕原点逆时针旋转角度 $\theta$。它改变 $x, y$ 的坐标值使其绕原点圆周运动，但保持点到原点的距离不变。
+  * **错切 (Shear)**：由非对角线上的 $b, c$ 控制。其中 $b$ 产生沿 $X$ 方向的错切，$c$ 产生沿 $Y$ 方向的错切。
+* **右上角 $2 \times 1$ 向量 $\begin{bmatrix} p_x \\ p_y \end{bmatrix}$（平移变换项）**：
+  * 控制图形沿 $X, Y$ 方向的**平移位移量**。
+  * 在齐次坐标最后一位 $w = 1$ 的情况下，平移项 $p_x, p_y$ 相当于直接累加到原坐标上（$x' = ax + by + p_x \cdot 1$）。若 $w \neq 1$，平移产生的实际位移为 $p_x/w$ 和 $p_y/w$。
+* **左下角 $1 \times 2$ 向量 $\begin{bmatrix} l & m \end{bmatrix}$（透视投影项）**：
+  * 用于二维空间中的**透视投影变换**，控制视线并非平行投射时的汇聚形变（即产生灭点）。
+* **右下角 $1 \times 1$ 标量 $[s]$（全局比例因子）**：
+  * 控制图形的**全局等比例统一缩放**。
+  * 在将齐次坐标转换为普通笛卡尔坐标时，所有分量都需要除以齐次项（此时 $w' = s$），这会导致普通坐标变为原先的 $\frac{1}{s}$：
+    * 若 $0 < s < 1$：图形整体**等比放大**。
+    * 若 $s > 1$：图形整体**等比缩小**。
+    * 若 $s = 1$：图形保持原大小。
 
 ---
 
@@ -1612,15 +1623,23 @@ l & m & n & s
 \end{array} \right]
 $$
 
-- **左上角 $3 \times 3$ 矩阵（线性变换项）**：
-  - 控制三维空间中的**旋转、缩放、反射对称和错切**。
-  - 对角线上的 $a, e, i$ 对 $X, Y, Z$ 方向分别进行缩放；若该子矩阵为正交矩阵且行列式为 1，则代表纯旋转。
-- **右上角 $3 \times 1$ 向量 $\begin{bmatrix} p_x \\ p_y \\ p_z \end{bmatrix}$（平移变换项）**：
-  - 控制图形沿 $X, Y, Z$ 三个方向的**空间平移距离**。
-- **左下角 $1 \times 3$ 向量 $\begin{bmatrix} l & m & n \end{bmatrix}$（透视投影项）**：
-  - 控制沿各主轴方向进行**透视投影变换**时，空间物体发生的形状透视形变。
-- **右下角 $1 \times 1$ 标量 $[s]$（全局比例因子）**：
-  - 控制三维物体的**整体全局等比放缩**，在进行坐标归一化除以 $s$ 时，体积将缩小为原来的 $\frac{1}{s^3}$。
+* **左上角 $3 \times 3$ 矩阵（线性变换项）**：
+  * 控制三维空间中的**旋转、缩放、反射对称和错切**。
+  * **比例缩放 (Scaling)**：由主对角线上的 $a, e, i$ 控制（分别对应 $s_x, s_y, s_z$）。
+    * 因子 $> 1$ 代表沿对应轴**拉伸**，处于 $0$ 到 $1$ 之间代表**压缩**。
+    * **镜像反射**：若有对角线项为负值，则沿相应的平面镜像。例如 $i = -1$ 时，物体的 $z$ 坐标反转，发生关于 $XY$ 平面的镜像反射。
+  * **旋转 (Rotation)**：旋转通过整个 $3 \times 3$ 矩阵的联合变化实现。对于纯旋转，该子矩阵必须是**正交矩阵**（各行、各列向量正交且模为1），且行列式值为 1。
+    * 绕三个不同的坐标轴旋转时，改变的矩阵元素各有不同，但旋转轴对应的坐标分量保持不变：
+      * **绕 Z 轴旋转**：改变左上角 $2 \times 2$ 的 $a, b, d, e$ 元素（即 $X, Y$ 坐标发生变化，而 $Z$ 坐标不变，此时对角线上的 $i = 1$）。
+      * **绕 X 轴旋转**：改变右下角 $2 \times 2$ 的 $e, f, h, i$ 元素（即 $Y, Z$ 坐标发生变化，而 $X$ 坐标不变，此时对角线上的 $a = 1$）。
+      * **绕 Y 轴旋转**：改变四个角上的 $a, c, g, i$ 元素（即 $X, Z$ 坐标发生变化，而 $Y$ 坐标不变，此时对角线上的 $e = 1$）。
+  * **错切 (Shear)**：由非对角线上的 6 个元素控制。
+* **右上角 $3 \times 1$ 向量 $\begin{bmatrix} p_x \\ p_y \\ p_z \end{bmatrix}$（平移变换项）**：
+  * 控制三维物体沿 $X, Y, Z$ 三个方向的**空间平移距离**。在 $w=1$ 下，平移分量直接作为常数相加。
+* **左下角 $1 \times 3$ 向量 $\begin{bmatrix} l & m & n \end{bmatrix}$（透视投影项）**：
+  * 控制空间几何物体在进行**透视投影**时产生的近大远小的投影形变。
+* **右下角 $1 \times 1$ 标量 $[s]$（全局比例因子）**：
+  * 控制三维物体的**整体全局等比放缩**。由于三维空间坐标在齐次归一化时都要除以 $s$，因此当 $s > 1$ 时，物体的尺寸变为原来的 $\frac{1}{s}$，而物体的物理体积则缩小为原来的 $\frac{1}{s^3}$。
 
 ---
 
@@ -1910,15 +1929,79 @@ $$
   M = T(x_f, y_f) \cdot R(\theta) \cdot T(-x_f, -y_f)
 $$
 
-  展开计算：
+  **矩阵各部分的具体定义与参数分析**：
+  * **平移到原点矩阵 $T(-x_f, -y_f)$**：
+    $$
+    T(-x_f, -y_f) = \begin{bmatrix}
+    1 & 0 & -x_f \\
+    0 & 1 & -y_f \\
+    0 & 0 & 1
+    \end{bmatrix}
+    $$
+    * **作用**：将旋转中心点 $F(x_f, y_f)$ 平移到坐标原点。参数中的平移增量 $t_x = -x_f$，$t_y = -y_f$，使得后续的旋转可以利用“绕原点旋转”的标准公式来执行。
+  * **绕原点标准旋转矩阵 $R(\theta)$**：
+    $$
+    R(\theta) = \begin{bmatrix}
+    \cos\theta & -\sin\theta & 0 \\
+    \sin\theta & \cos\theta & 0 \\
+    0 & 0 & 1
+    \end{bmatrix}
+    $$
+    * **作用**：控制物体绕当前的坐标原点逆时针旋转 $\theta$ 角（弧度制）。
+  * **反向平移回原处矩阵 $T(x_f, y_f)$**：
+    $$
+    T(x_f, y_f) = \begin{bmatrix}
+    1 & 0 & x_f \\
+    0 & 1 & y_f \\
+    0 & 0 & 1
+    \end{bmatrix}
+    $$
+    * **作用**：这是第一个平移矩阵的逆矩阵。负责在完成原点旋转后，将整个物体连同旋转中心一起还原，向正方向平移 $t_x = x_f$ 和 $t_y = y_f$ 返回最初的位置。
 
-$$
-  M = \begin{bmatrix}
-  \cos\theta & -\sin\theta & x_f(1-\cos\theta) + y_f\sin\theta \\
-  \sin\theta & \cos\theta & y_f(1-\cos\theta) - x_f\sin\theta \\
-  0 & 0 & 1
-  \end{bmatrix}
-$$
+  **逐步乘积展开计算过程**：
+  1. 计算右侧两个矩阵相乘 $R(\theta) \cdot T(-x_f, -y_f)$：
+     $$
+     R(\theta) \cdot T(-x_f, -y_f) = \begin{bmatrix}
+     \cos\theta & -\sin\theta & 0 \\
+     \sin\theta & \cos\theta & 0 \\
+     0 & 0 & 1
+     \end{bmatrix} \begin{bmatrix}
+     1 & 0 & -x_f \\
+     0 & 1 & -y_f \\
+     0 & 0 & 1
+     \end{bmatrix} = \begin{bmatrix}
+     \cos\theta & -\sin\theta & -x_f\cos\theta + y_f\sin\theta \\
+     \sin\theta & \cos\theta & -x_f\sin\theta - y_f\cos\theta \\
+     0 & 0 & 1
+     \end{bmatrix}
+     $$
+  2. 左乘最左侧的平移矩阵 $T(x_f, y_f)$：
+     $$
+     M = T(x_f, y_f) \cdot \left[ R(\theta) \cdot T(-x_f, -y_f) \right] = \begin{bmatrix}
+     1 & 0 & x_f \\
+     0 & 1 & y_f \\
+     0 & 0 & 1
+     \end{bmatrix} \begin{bmatrix}
+     \cos\theta & -\sin\theta & -x_f\cos\theta + y_f\sin\theta \\
+     \sin\theta & \cos\theta & -x_f\sin\theta - y_f\cos\theta \\
+     0 & 0 & 1
+     \end{bmatrix}
+     $$
+     $$
+     = \begin{bmatrix}
+     \cos\theta & -\sin\theta & -x_f\cos\theta + y_f\sin\theta + x_f \\
+     \sin\theta & \cos\theta & -x_f\sin\theta - y_f\cos\theta + y_f \\
+     0 & 0 & 1
+     \end{bmatrix}
+     $$
+  3. 整理矩阵第三列的代数常数项，最终得到任意点旋转复合矩阵通式：
+     $$
+     M = \begin{bmatrix}
+     \cos\theta & -\sin\theta & x_f(1-\cos\theta) + y_f\sin\theta \\
+     \sin\theta & \cos\theta & y_f(1-\cos\theta) - x_f\sin\theta \\
+     0 & 0 & 1
+     \end{bmatrix}
+     $$
 
 ---
 
