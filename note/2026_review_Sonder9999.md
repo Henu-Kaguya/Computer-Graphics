@@ -2144,6 +2144,75 @@ graph TD
       * 物体的长、宽、高三个主轴方向的平行线在投影面上均发生汇聚，没有任何一组主轴棱线在画面上保持平行；
       * 三组平行棱线分别汇聚于三个主灭点，其中两个灭点通常在视平线上（左右分布），第三个灭点则位于视平线之上（仰视）或之下（俯视），常用于表现宏大高耸物体的视觉张力。
 
+<div align="center">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" width="100%" height="100%" style="background-color: #ffffff; max-width: 800px; display: block; margin: auto;">
+  <g transform="translate(10, 10)">
+    <rect x="0" y="0" width="270" height="260" rx="5" fill="#fcfcfc" stroke="#dddddd" stroke-width="1.5" />
+    <text x="135" y="30" font-family="sans-serif" font-size="14" font-weight="bold" fill="#333" text-anchor="middle">一点透视 (1个灭点)</text>
+    <line x1="10" y1="130" x2="260" y2="130" stroke="#cccccc" stroke-dasharray="3,3" stroke-width="1" />
+    <circle cx="135" cy="130" r="4" fill="#ff4d4f" />
+    <text x="135" y="122" font-family="sans-serif" font-size="10" fill="#ff4d4f" font-weight="bold" text-anchor="middle">灭点 VP1</text>
+    <polygon points="95,160 175,160 175,220 95,220" fill="none" stroke="#333333" stroke-width="1.5" />
+    <polygon points="115,145 155,145 155,175 115,175" fill="none" stroke="#999999" stroke-width="1" />
+    <line x1="95" y1="160" x2="115" y2="145" stroke="#409eff" stroke-width="1.5" />
+    <line x1="175" y1="160" x2="155" y2="145" stroke="#409eff" stroke-width="1.5" />
+    <line x1="95" y1="220" x2="115" y2="175" stroke="#409eff" stroke-width="1.5" />
+    <line x1="175" y1="220" x2="155" y2="175" stroke="#409eff" stroke-width="1.5" />
+    <line x1="115" y1="145" x2="135" y2="130" stroke="#ff4d4f" stroke-dasharray="2,2" stroke-width="1" />
+    <line x1="155" y1="145" x2="135" y2="130" stroke="#ff4d4f" stroke-dasharray="2,2" stroke-width="1" />
+    <text x="135" y="245" font-family="sans-serif" font-size="11" fill="#666" text-anchor="middle">X轴和Y轴平行，仅Z轴(深度)汇聚</text>
+  </g>
+  <g transform="translate(305, 10)">
+    <rect x="0" y="0" width="270" height="260" rx="5" fill="#fcfcfc" stroke="#dddddd" stroke-width="1.5" />
+    <text x="135" y="30" font-family="sans-serif" font-size="14" font-weight="bold" fill="#333" text-anchor="middle">两点透视 (2个灭点)</text>
+    <line x1="10" y1="130" x2="260" y2="130" stroke="#cccccc" stroke-dasharray="3,3" stroke-width="1" />
+    <circle cx="20" cy="130" r="4" fill="#ff4d4f" />
+    <circle cx="250" cy="130" r="4" fill="#ff4d4f" />
+    <text x="25" y="122" font-family="sans-serif" font-size="10" fill="#ff4d4f" font-weight="bold">VP1</text>
+    <text x="245" y="122" font-family="sans-serif" font-size="10" fill="#ff4d4f" font-weight="bold" text-anchor="end">VP2</text>
+    <line x1="135" y1="150" x2="135" y2="220" stroke="#333" stroke-width="2" />
+    <line x1="90" y1="160" x2="90" y2="200" stroke="#999" stroke-width="1" />
+    <line x1="180" y1="165" x2="180" y2="205" stroke="#999" stroke-width="1" />
+    <line x1="135" y1="150" x2="90" y2="160" stroke="#333" stroke-width="1.5" />
+    <line x1="135" y1="220" x2="90" y2="200" stroke="#333" stroke-width="1.5" />
+    <line x1="135" y1="150" x2="180" y2="165" stroke="#333" stroke-width="1.5" />
+    <line x1="135" y1="220" x2="180" y2="205" stroke="#333" stroke-width="1.5" />
+    <line x1="90" y1="160" x2="20" y2="130" stroke="#ff4d4f" stroke-dasharray="2,2" stroke-width="1" />
+    <line x1="90" y1="200" x2="20" y2="130" stroke="#ff4d4f" stroke-dasharray="2,2" stroke-width="1" />
+    <line x1="180" y1="165" x2="250" y2="130" stroke="#ff4d4f" stroke-dasharray="2,2" stroke-width="1" />
+    <line x1="180" y1="205" x2="250" y2="130" stroke="#ff4d4f" stroke-dasharray="2,2" stroke-width="1" />
+    <line x1="135" y1="150" x2="250" y2="130" stroke="#ff4d4f" stroke-dasharray="2,2" stroke-width="1" />
+    <line x1="135" y1="150" x2="20" y2="130" stroke="#ff4d4f" stroke-dasharray="2,2" stroke-width="1" />
+    <text x="135" y="245" font-family="sans-serif" font-size="11" fill="#666" text-anchor="middle">Y轴(高度)平行垂直，X和Z轴汇聚</text>
+  </g>
+  <g transform="translate(600, 10)">
+    <rect x="0" y="0" width="270" height="260" rx="5" fill="#fcfcfc" stroke="#dddddd" stroke-width="1.5" />
+    <text x="135" y="30" font-family="sans-serif" font-size="14" font-weight="bold" fill="#333" text-anchor="middle">三点透视 (3个灭点)</text>
+    <line x1="10" y1="160" x2="260" y2="160" stroke="#cccccc" stroke-dasharray="3,3" stroke-width="1" />
+    <circle cx="20" cy="160" r="4" fill="#ff4d4f" />
+    <circle cx="250" cy="160" r="4" fill="#ff4d4f" />
+    <circle cx="135" cy="45" r="4" fill="#ff4d4f" />
+    <text x="25" y="152" font-family="sans-serif" font-size="10" fill="#ff4d4f" font-weight="bold">VP1</text>
+    <text x="245" y="152" font-family="sans-serif" font-size="10" fill="#ff4d4f" font-weight="bold" text-anchor="end">VP2</text>
+    <text x="135" y="38" font-family="sans-serif" font-size="10" fill="#ff4d4f" font-weight="bold" text-anchor="middle">VP3</text>
+    <line x1="135" y1="110" x2="115" y2="200" stroke="#333" stroke-width="2" />
+    <line x1="135" y1="110" x2="155" y2="200" stroke="#333" stroke-width="2" />
+    <line x1="115" y1="200" x2="155" y2="200" stroke="#333" stroke-width="1.5" />
+    <line x1="90" y1="130" x2="80" y2="190" stroke="#999" stroke-width="1" />
+    <line x1="180" y1="130" x2="190" y2="190" stroke="#999" stroke-width="1" />
+    <line x1="135" y1="110" x2="90" y2="130" stroke="#333" stroke-width="1.5" />
+    <line x1="135" y1="110" x2="180" y2="130" stroke="#333" stroke-width="1.5" />
+    <line x1="115" y1="200" x2="80" y2="190" stroke="#333" stroke-width="1.5" />
+    <line x1="155" y1="200" x2="190" y2="190" stroke="#333" stroke-width="1.5" />
+    <line x1="115" y1="200" x2="135" y2="45" stroke="#ff4d4f" stroke-dasharray="2,2" stroke-width="1" />
+    <line x1="155" y1="200" x2="135" y2="45" stroke="#ff4d4f" stroke-dasharray="2,2" stroke-width="1" />
+    <line x1="90" y1="130" x2="20" y2="160" stroke="#ff4d4f" stroke-dasharray="2,2" stroke-width="1" />
+    <line x1="180" y1="130" x2="250" y2="160" stroke="#ff4d4f" stroke-dasharray="2,2" stroke-width="1" />
+    <text x="135" y="245" font-family="sans-serif" font-size="11" fill="#666" text-anchor="middle">X、Y、Z轴均不平行，分别汇聚</text>
+  </g>
+</svg>
+</div>
+
 ---
 
 ## 五、 OpenGL 中的观察与投影函数
@@ -2498,6 +2567,61 @@ $$
     <ellipse cx="-15" cy="-15" rx="20" ry="20" fill="url(#phong-specular)" transform="rotate(-15 -15 -15)" />
     <text x="0" y="95" style="font-family: Arial; font-size: 13px; font-weight: bold; fill: #333; text-anchor: middle;">Phong Shading (法向插值)</text>
     <text x="0" y="112" style="font-family: Arial; font-size: 11px; fill: #666; text-anchor: middle;">逐像素插值法向并计算光照</text>
+  </g>
+</svg>
+</div>
+
+<div align="center">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" width="100%" height="100%" style="background-color: #ffffff; max-width: 700px; display: block; margin: auto;">
+  <g transform="translate(10, 10)">
+    <rect x="0" y="0" width="370" height="295" rx="5" fill="#fcfcfc" stroke="#dddddd" stroke-width="1.5" />
+    <text x="185" y="25" font-family="sans-serif" font-size="14" font-weight="bold" fill="#333" text-anchor="middle">Gouraud Shading (双线性光强插值)</text>
+    <polygon points="185,50 85,210 285,210" fill="none" stroke="#444444" stroke-width="1.5" />
+    <circle cx="185" cy="50" r="5" fill="#ff4d4f" />
+    <text x="185" y="42" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ff4d4f" text-anchor="middle">V1 (颜色 I1)</text>
+    <circle cx="85" cy="210" r="5" fill="#52c41a" />
+    <text x="65" y="225" font-family="sans-serif" font-size="11" font-weight="bold" fill="#52c41a">V2 (颜色 I2)</text>
+    <circle cx="285" cy="210" r="5" fill="#1890ff" />
+    <text x="305" y="225" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1890ff" text-anchor="end">V3 (颜色 I3)</text>
+    <line x1="50" y1="130" x2="320" y2="130" stroke="#999999" stroke-dasharray="4,4" stroke-width="1" />
+    <text x="325" y="133" font-family="sans-serif" font-size="10" fill="#666">扫描线</text>
+    <circle cx="135" cy="130" r="4" fill="#75c236" />
+    <text x="110" y="125" font-family="sans-serif" font-size="10" fill="#555">A (插值颜色 Ia)</text>
+    <circle cx="235" cy="130" r="4" fill="#8cb2a6" />
+    <text x="260" y="125" font-family="sans-serif" font-size="10" fill="#555">B (插值颜色 Ib)</text>
+    <rect x="180" y="127" width="8" height="6" fill="#fadb14" />
+    <circle cx="184" cy="130" r="2" fill="#d48806" />
+    <text x="184" y="120" font-family="sans-serif" font-size="9" fill="#d48806" font-weight="bold" text-anchor="middle">像素 P (插值颜色 Ip)</text>
+    <text x="185" y="255" font-family="sans-serif" font-size="11" fill="#666" text-anchor="middle">插值顺序：顶点颜色 → 边界交点颜色 → 内部像素颜色</text>
+    <text x="185" y="275" font-family="sans-serif" font-size="10" fill="#ff4d4f" font-weight="bold" text-anchor="middle">缺点：无法产生正确镜面高光 (产生“高光失真”)</text>
+  </g>
+  <g transform="translate(410, 10)">
+    <rect x="0" y="0" width="370" height="295" rx="5" fill="#fcfcfc" stroke="#dddddd" stroke-width="1.5" />
+    <text x="185" y="25" font-family="sans-serif" font-size="14" font-weight="bold" fill="#333" text-anchor="middle">Phong Shading (双线性法向插值)</text>
+    <polygon points="185,50 85,210 285,210" fill="none" stroke="#444444" stroke-width="1.5" />
+    <line x1="185" y1="50" x2="185" y2="15" stroke="#333333" stroke-width="1.5" />
+    <polygon points="185,15 182,22 188,22" fill="#333333" />
+    <text x="185" y="10" font-family="sans-serif" font-size="10" fill="#333" text-anchor="middle">N1</text>
+    <line x1="85" y1="210" x2="60" y2="190" stroke="#333333" stroke-width="1.5" />
+    <polygon points="60,190 67,192 63,197" fill="#333333" />
+    <text x="50" y="185" font-family="sans-serif" font-size="10" fill="#333">N2</text>
+    <line x1="285" y1="210" x2="310" y2="190" stroke="#333333" stroke-width="1.5" />
+    <polygon points="310,190 307,197 303,192" fill="#333333" />
+    <text x="315" y="185" font-family="sans-serif" font-size="10" fill="#333">N3</text>
+    <line x1="50" y1="130" x2="320" y2="130" stroke="#999999" stroke-dasharray="4,4" stroke-width="1" />
+    <text x="325" y="133" font-family="sans-serif" font-size="10" fill="#666">扫描线</text>
+    <line x1="135" y1="130" x2="115" y2="110" stroke="#333333" stroke-width="1" />
+    <polygon points="115,110 121,112 118,116" fill="#333333" />
+    <text x="110" y="105" font-family="sans-serif" font-size="9" fill="#555">Na</text>
+    <line x1="235" y1="130" x2="245" y2="105" stroke="#333333" stroke-width="1" />
+    <polygon points="245,105 240,111 246,113" fill="#333333" />
+    <text x="248" y="100" font-family="sans-serif" font-size="9" fill="#555">Nb</text>
+    <rect x="180" y="127" width="8" height="6" fill="#ff9900" />
+    <line x1="184" y1="130" x2="184" y2="100" stroke="#ff4d4f" stroke-width="1.5" />
+    <polygon points="184,100 181,107 187,107" fill="#ff4d4f" />
+    <text x="184" y="94" font-family="sans-serif" font-size="9" fill="#ff4d4f" font-weight="bold" text-anchor="middle">Np (插值法线)</text>
+    <text x="185" y="255" font-family="sans-serif" font-size="11" fill="#666" text-anchor="middle">插值顺序：顶点法线 → 边界交点法线 → 像素法线 Np</text>
+    <text x="185" y="275" font-family="sans-serif" font-size="10" fill="#1890ff" font-weight="bold" text-anchor="middle">优点：在像素 P 处用 Np 计算光照，完美呈现高光</text>
   </g>
 </svg>
 </div>
