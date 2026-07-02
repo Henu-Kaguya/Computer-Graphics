@@ -552,6 +552,160 @@
     6. 将 AET 中剩余边节点的 $X$ 递增更新：$x_{\text{new}} = x_{\text{old}} + \Delta x$。
     7. 递增扫描线 $y = y + 1$，循环第 2 步直至 AET 和 ET 均为空。
 
+> [!TIP]
+> **期末大题演练：多边形扫描转换与有效边表（ET/AET）计算**
+> 
+> **【题目描述】**
+> 已知多边形有 6 个顶点，其局部网格坐标为：$A(2, 1)$、$B(6, 1)$、$C(6, 5)$、$D(4, 3)$、$E(2, 5)$、$F(1, 4)$。
+> 规定有效边节点的物理存储结构为：`[ y_max | x_ymin | 1/k | next ]`。
+> 请构建该多边形的边表（ET），并写出扫描线在 $y=1$、$y=2$、$y=3$ 时的活动边表（AET）及其填充区间。
+> 
+> **【多边形网格示意图】**
+> 
+> <div align="center">
+> <svg viewBox="0 0 400 350" width="100%" style="background-color: #ffffff; max-width: 500px; display: block; margin: auto;">
+>   <defs>
+>     <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+>       <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#f0f0f0" stroke-width="1"/>
+>     </pattern>
+>     <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+>       <path d="M 0 0 L 10 5 L 0 10 z" fill="#333" />
+>     </marker>
+>   </defs>
+>   <rect width="100%" height="100%" fill="url(#grid)" />
+>   <line x1="30" y1="300" x2="360" y2="300" stroke="#333" stroke-width="2" marker-end="url(#arrow)" />
+>   <line x1="50" y1="320" x2="50" y2="30" stroke="#333" stroke-width="2" marker-end="url(#arrow)" />
+>   <text x="355" y="315" font-family="sans-serif" font-size="14" fill="#333">x</text>
+>   <text x="35" y="35" font-family="sans-serif" font-size="14" fill="#333">y</text>
+>   <text x="35" y="315" font-family="sans-serif" font-size="12" fill="#666">0</text>
+>   <line x1="90" y1="300" x2="90" y2="305" stroke="#333" /><text x="86" y="320" font-family="sans-serif" font-size="12" fill="#666">1</text>
+>   <line x1="130" y1="300" x2="130" y2="305" stroke="#333" /><text x="126" y="320" font-family="sans-serif" font-size="12" fill="#666">2</text>
+>   <line x1="170" y1="300" x2="170" y2="305" stroke="#333" /><text x="166" y="320" font-family="sans-serif" font-size="12" fill="#666">3</text>
+>   <line x1="210" y1="300" x2="210" y2="305" stroke="#333" /><text x="206" y="320" font-family="sans-serif" font-size="12" fill="#666">4</text>
+>   <line x1="250" y1="300" x2="250" y2="305" stroke="#333" /><text x="246" y="320" font-family="sans-serif" font-size="12" fill="#666">5</text>
+>   <line x1="290" y1="300" x2="290" y2="305" stroke="#333" /><text x="286" y="320" font-family="sans-serif" font-size="12" fill="#666">6</text>
+>   <line x1="45" y1="260" x2="50" y2="260" stroke="#333" /><text x="30" y="264" font-family="sans-serif" font-size="12" fill="#666">1</text>
+>   <line x1="45" y1="220" x2="50" y2="220" stroke="#333" /><text x="30" y="224" font-family="sans-serif" font-size="12" fill="#666">2</text>
+>   <line x1="45" y1="180" x2="50" y2="180" stroke="#333" /><text x="30" y="184" font-family="sans-serif" font-size="12" fill="#666">3</text>
+>   <line x1="45" y1="140" x2="50" y2="140" stroke="#333" /><text x="30" y="144" font-family="sans-serif" font-size="12" fill="#666">4</text>
+>   <line x1="45" y1="100" x2="50" y2="100" stroke="#333" /><text x="30" y="104" font-family="sans-serif" font-size="12" fill="#666">5</text>
+>   <polygon points="130,260 290,260 290,100 210,180 130,100 90,140" fill="rgba(64, 158, 255, 0.2)" stroke="#409EFF" stroke-width="3" stroke-linejoin="round" />
+>   <circle cx="130" cy="260" r="4" fill="#F56C6C" />
+>   <circle cx="290" cy="260" r="4" fill="#F56C6C" />
+>   <circle cx="290" cy="100" r="4" fill="#F56C6C" />
+>   <circle cx="210" cy="180" r="4" fill="#F56C6C" />
+>   <circle cx="130" cy="100" r="4" fill="#F56C6C" />
+>   <circle cx="90" cy="140" r="4" fill="#F56C6C" />
+>   <text x="120" y="280" font-family="sans-serif" font-size="12" font-weight="bold" fill="#333">A(2,1)</text>
+>   <text x="295" y="280" font-family="sans-serif" font-size="12" font-weight="bold" fill="#333">B(6,1)</text>
+>   <text x="295" y="95" font-family="sans-serif" font-size="12" font-weight="bold" fill="#333">C(6,5)</text>
+>   <text x="210" y="200" font-family="sans-serif" font-size="12" font-weight="bold" fill="#333" text-anchor="middle">D(4,3)</text>
+>   <text x="110" y="95" font-family="sans-serif" font-size="12" font-weight="bold" fill="#333">E(2,5)</text>
+>   <text x="50" y="140" font-family="sans-serif" font-size="12" font-weight="bold" fill="#333">F(1,4)</text>
+> </svg>
+> </div>
+> 
+> ---
+> 
+> #### 1. 计算所有有效非水平边的参数
+> 水平边 $AB$ （$y=1$ 时两端点高度一致）对扫描线无穿插变化贡献，直接舍弃。对其余 5 条有效边计算其边界特征值：
+> - **$BC$ 边**：下端点 $y_{\min}=1$，上端点 $y_{\max}=5$，下端点对应 $x=6$。
+>   斜率倒数：
+>   
+>   $$
+>   \frac{1}{k} = \frac{x_C - x_B}{y_C - y_B} = \frac{6 - 6}{5 - 1} = 0
+>   $$
+>   
+> - **$FA$ 边**：下端点 $y_{\min}=1$，上端点 $y_{\max}=4$，下端点对应 $x=2$。
+>   斜率倒数：
+>   
+>   $$
+>   \frac{1}{k} = \frac{x_F - x_A}{y_F - y_A} = \frac{1 - 2}{4 - 1} = -\frac{1}{3}
+>   $$
+>   
+> - **$CD$ 边**：下端点 $y_{\min}=3$，上端点 $y_{\max}=5$，下端点对应 $x=4$。
+>   斜率倒数：
+>   
+>   $$
+>   \frac{1}{k} = \frac{x_C - x_D}{y_C - y_D} = \frac{6 - 4}{5 - 3} = 1
+>   $$
+>   
+> - **$DE$ 边**：下端点 $y_{\min}=3$，上端点 $y_{\max}=5$，下端点对应 $x=4$。
+>   斜率倒数：
+>   
+>   $$
+>   \frac{1}{k} = \frac{x_E - x_D}{y_E - y_D} = \frac{2 - 4}{5 - 3} = -1
+>   $$
+>   
+> - **$EF$ 边**：下端点 $y_{\min}=4$，上端点 $y_{\max}=5$，下端点对应 $x=1$。
+>   斜率倒数：
+>   
+>   $$
+>   \frac{1}{k} = \frac{x_E - x_F}{y_E - y_F} = \frac{2 - 1}{5 - 4} = 1
+>   $$
+>   
+> ---
+> 
+> #### 2. 构建边表 (Edge Table, ET)
+> 将各条边按照其下端点的纵坐标 $y_{\min}$ 归档入对应的扫描桶中。在同一个桶链表中，按照端点 $x$ 坐标递增排序，若 $x$ 相同，则按 $\frac{1}{k}$ 递增排序：
+> - **$y=1$ 桶**：挂入 $FA$ 边与 $BC$ 边。因为 $FA$ 的 $x=2$ 小于 $BC$ 的 $x=6$，因此链表顺序为：$FA \to BC$。
+> - **$y=2$ 桶**：无新起点边，桶为空（`NULL`）。
+> - **$y=3$ 桶**：挂入 $DE$ 边与 $CD$ 边。两者的 $x=4$ 相同，但 $DE$ 的 $\frac{1}{k}=-1$ 小于 $CD$ 的 $\frac{1}{k}=1$，因此链表顺序为：$DE \to CD$。
+> - **$y=4$ 桶**：挂入 $EF$ 边。
+> 
+> **构建完的静态 ET 表结果如下**：
+> - **$y=1$ 桶**：$\to \text{`[4 | 2 | -1/3]`(FA)} \to \text{`[5 | 6 | 0]`(BC)}$
+> - **$y=2$ 桶**：$\to \text{NULL}$
+> - **$y=3$ 桶**：$\to \text{`[5 | 4 | -1]`(DE)} \to \text{`[5 | 4 | 1]`(CD)}$
+> - **$y=4$ 桶**：$\to \text{`[5 | 1 | 1]`(EF)}$
+> 
+> ---
+> 
+> #### 3. 活动边表 (Active Edge Table, AET) 的递推更新
+> 演示扫描线 $y = 1, 2, 3$ 时的活动边表动态更新与像素区间配对：
+> 
+> **(1) 当扫描线 $y = 1$ 时**：
+> - 将 $y=1$ 桶中的新边并入当前为空的 AET并排序。
+> - **当前 AET 状态**：
+>   
+>   $$
+>   \text{AET} \to \text{`[4 | 2 | -1/3]`(FA)} \to \text{`[5 | 6 | 0]`(BC)}
+>   $$
+>   
+> - **交点配对与填充区间**：
+>   两交点为 $x=2$ 与 $x=6$。对两交点之间的像素区间 **$[2, 6]$** 实施色彩填充。
+> 
+> **(2) 当扫描线 $y = 2$ 时**：
+> - 剔除失效边：当前 AET 中无最大高度 $y_{\max}=2$ 的边，不执行剔除。
+> - 递增更新 $X$ 坐标（$x_{\text{new}} = x_{\text{old}} + \frac{1}{k}$）：
+>   - $FA$ 边：$x = 2 + (-\frac{1}{3}) = \frac{5}{3} \approx 1.67$
+>   - $BC$ 边：$x = 6 + 0 = 6$
+> - 并入新边：$y=2$ 桶的 ET 为空，无新边并入。对 AET 重新排序。
+> - **当前 AET 状态**：
+>   
+>   $$
+>   \text{AET} \to \text{`[4 | 5/3 | -1/3]`(FA)} \to \text{`[5 | 6 | 0]`(BC)}
+>   $$
+>   
+> - **交点配对与填充区间**：
+>   两交点为 $x \approx 1.67$ 与 $x=6$。由于填充像素网格通常取整，该处奇偶配对区间为 $[1.67, 6]$，实际着色区间仍为 **$[2, 6]$**。
+> 
+> **(3) 当扫描线 $y = 3$ 时**：
+> - 剔除失效边：当前 AET 中无最大高度 $y_{\max}=3$ 的边，不执行剔除。
+> - 递增更新 $X$ 坐标：
+>   - $FA$ 边：$x = \frac{5}{3} + (-\frac{1}{3}) = \frac{4}{3} \approx 1.33$
+>   - $BC$ 边：$x = 6 + 0 = 6$
+> - 并入新边：有 $y=3$ 桶中的新边 $DE$ 和 $CD$ 并入，并对 AET 链表中所有边按最新 $x$ 重排（四个交点 $x$ 坐标值分别为：$\frac{4}{3}$、 $4$、 $4$、 $6$）：
+> - **当前 AET 状态**：
+>   
+>   $$
+>   \text{AET} \to \text{`[4 | 4/3 | -1/3]`(FA)} \to \text{`[5 | 4 | -1]`(DE)} \to \text{`[5 | 4 | 1]`(CD)} \to \text{`[5 | 6 | 0]`(BC)}
+>   $$
+>   
+> - **交点配对与填充区间**：
+>   两两奇偶配对可得到两个独立区间：$[\frac{4}{3}, 4]$ 与 $[4, 6]$。
+>   像素化填充时，区间 1 填充 $[2, 4]$，区间 2 填充 $[4, 6]$，最终合并填充区间为 **$[2, 6]$**。
+
 ---
 
 ### 3. 种子填充算法
