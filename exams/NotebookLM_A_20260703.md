@@ -207,6 +207,60 @@
 
 **2. 【改进的活动边表（AET）填充算法】已知某多边形的顶点坐标为：$A(2, 1)$、$B(6, 1)$、$C(6, 5)$、$D(4, 3)$、$E(2, 5)$、$F(1, 4)$。若采用多边形扫描转换算法进行填充，且表结点结构为 `[y_{max} | x | 1/k | next]`。**
 
+<div align="center">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 380" width="100%" height="100%" style="background-color: #ffffff; max-width: 500px; display: block; margin: auto;">
+  <line x1="90" y1="40" x2="90" y2="320" stroke="#e5e7eb" stroke-width="1" />
+  <line x1="130" y1="40" x2="130" y2="320" stroke="#e5e7eb" stroke-width="1" />
+  <line x1="170" y1="40" x2="170" y2="320" stroke="#e5e7eb" stroke-width="1" />
+  <line x1="210" y1="40" x2="210" y2="320" stroke="#e5e7eb" stroke-width="1" />
+  <line x1="250" y1="40" x2="250" y2="320" stroke="#e5e7eb" stroke-width="1" />
+  <line x1="290" y1="40" x2="290" y2="320" stroke="#e5e7eb" stroke-width="1" />
+  <line x1="330" y1="40" x2="330" y2="320" stroke="#e5e7eb" stroke-width="1" />
+  <line x1="370" y1="40" x2="370" y2="320" stroke="#e5e7eb" stroke-width="1" />
+  <line x1="50" y1="280" x2="380" y2="280" stroke="#e5e7eb" stroke-width="1" />
+  <line x1="50" y1="240" x2="380" y2="240" stroke="#e5e7eb" stroke-width="1" />
+  <line x1="50" y1="200" x2="380" y2="200" stroke="#e5e7eb" stroke-width="1" />
+  <line x1="50" y1="160" x2="380" y2="160" stroke="#e5e7eb" stroke-width="1" />
+  <line x1="50" y1="120" x2="380" y2="120" stroke="#e5e7eb" stroke-width="1" />
+  <line x1="50" y1="80" x2="380" y2="80" stroke="#e5e7eb" stroke-width="1" />
+  <line x1="50" y1="40" x2="380" y2="40" stroke="#e5e7eb" stroke-width="1" />
+  <line x1="40" y1="320" x2="380" y2="320" stroke="#374151" stroke-width="2" />
+  <polygon points="380,320 372,316 372,324" fill="#374151" />
+  <text x="385" y="325" font-family="sans-serif" font-size="14" fill="#374151">x</text>
+  <line x1="50" y1="330" x2="50" y2="40" stroke="#374151" stroke-width="2" />
+  <polygon points="50,40 46,48 54,48" fill="#374151" />
+  <text x="45" y="30" font-family="sans-serif" font-size="14" fill="#374151">y</text>
+  <text x="40" y="335" font-family="sans-serif" font-size="12" fill="#6b7280">0</text>
+  <text x="85" y="335" font-family="sans-serif" font-size="12" fill="#6b7280">1</text>
+  <text x="125" y="335" font-family="sans-serif" font-size="12" fill="#6b7280">2</text>
+  <text x="165" y="335" font-family="sans-serif" font-size="12" fill="#6b7280">3</text>
+  <text x="205" y="335" font-family="sans-serif" font-size="12" fill="#6b7280">4</text>
+  <text x="245" y="335" font-family="sans-serif" font-size="12" fill="#6b7280">5</text>
+  <text x="285" y="335" font-family="sans-serif" font-size="12" fill="#6b7280">6</text>
+  <text x="325" y="335" font-family="sans-serif" font-size="12" fill="#6b7280">7</text>
+  <text x="365" y="335" font-family="sans-serif" font-size="12" fill="#6b7280">8</text>
+  <text x="30" y="285" font-family="sans-serif" font-size="12" fill="#6b7280">1</text>
+  <text x="30" y="245" font-family="sans-serif" font-size="12" fill="#6b7280">2</text>
+  <text x="30" y="205" font-family="sans-serif" font-size="12" fill="#6b7280">3</text>
+  <text x="30" y="165" font-family="sans-serif" font-size="12" fill="#6b7280">4</text>
+  <text x="30" y="125" font-family="sans-serif" font-size="12" fill="#6b7280">5</text>
+  <text x="30" y="85" font-family="sans-serif" font-size="12" fill="#6b7280">6</text>
+  <polygon points="130,280 290,280 290,120 210,200 130,120 90,160" fill="#93c5fd" fill-opacity="0.3" stroke="#2563eb" stroke-width="2" />
+  <circle cx="130" cy="280" r="4" fill="#1d4ed8" />
+  <text x="135" y="295" font-family="sans-serif" font-size="12" fill="#1e3a8a">A(2, 1)</text>
+  <circle cx="290" cy="280" r="4" fill="#1d4ed8" />
+  <text x="295" y="295" font-family="sans-serif" font-size="12" fill="#1e3a8a">B(6, 1)</text>
+  <circle cx="290" cy="120" r="4" fill="#1d4ed8" />
+  <text x="295" y="115" font-family="sans-serif" font-size="12" fill="#1e3a8a">C(6, 5)</text>
+  <circle cx="210" cy="200" r="4" fill="#1d4ed8" />
+  <text x="215" y="215" font-family="sans-serif" font-size="12" fill="#1e3a8a">D(4, 3)</text>
+  <circle cx="130" cy="120" r="4" fill="#1d4ed8" />
+  <text x="120" y="110" font-family="sans-serif" font-size="12" fill="#1e3a8a">E(2, 5)</text>
+  <circle cx="90" cy="160" r="4" fill="#1d4ed8" />
+  <text x="65" y="155" font-family="sans-serif" font-size="12" fill="#1e3a8a">F(1, 4)</text>
+</svg>
+</div>
+
 **请回答：**
 
 *(1)* 构建该多边形的完整边表（ET 表）。
@@ -216,5 +270,49 @@
 *(3)* 写出 $y = 3$ 时的有效填充区间。
 
 **3. 【Liang-Barsky 算法直线裁剪】已知裁剪窗口为一个矩形区域，边界为：$x_{w\min} = 0$，$x_{w\max} = 2$，$y_{w\min} = 0$，$y_{w\max} = 2$。待裁剪直线段的起点坐标为 $A(1, -1)$，终点坐标为 $B(2, 3)$。**
+
+<div align="center">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%" style="background-color: #ffffff; max-width: 500px; display: block; margin: auto;">
+  <line x1="60" y1="20" x2="60" y2="380" stroke="#e5e7eb" stroke-width="1" />
+  <line x1="180" y1="20" x2="180" y2="380" stroke="#e5e7eb" stroke-width="1" />
+  <line x1="240" y1="20" x2="240" y2="380" stroke="#e5e7eb" stroke-width="1" />
+  <line x1="300" y1="20" x2="300" y2="380" stroke="#e5e7eb" stroke-width="1" />
+  <line x1="360" y1="20" x2="360" y2="380" stroke="#e5e7eb" stroke-width="1" />
+  <line x1="30" y1="380" x2="370" y2="380" stroke="#e5e7eb" stroke-width="1" />
+  <line x1="30" y1="320" x2="370" y2="320" stroke="#e5e7eb" stroke-width="1" />
+  <line x1="30" y1="200" x2="370" y2="200" stroke="#e5e7eb" stroke-width="1" />
+  <line x1="30" y1="140" x2="370" y2="140" stroke="#e5e7eb" stroke-width="1" />
+  <line x1="30" y1="80" x2="370" y2="80" stroke="#e5e7eb" stroke-width="1" />
+  <line x1="30" y1="20" x2="370" y2="20" stroke="#e5e7eb" stroke-width="1" />
+  <rect x="120" y="140" width="120" height="120" fill="#22c55e" fill-opacity="0.1" stroke="#16a34a" stroke-width="2" />
+  <line x1="30" y1="260" x2="340" y2="260" stroke="#374151" stroke-width="2" />
+  <polygon points="340,260 332,256 332,264" fill="#374151" />
+  <text x="345" y="265" font-family="sans-serif" font-size="14" fill="#374151">x</text>
+  <line x1="120" y1="375" x2="120" y2="30" stroke="#374151" stroke-width="2" />
+  <polygon points="120,30 116,38 124,38" fill="#374151" />
+  <text x="115" y="20" font-family="sans-serif" font-size="14" fill="#374151">y</text>
+  <text x="50" y="275" font-family="sans-serif" font-size="12" fill="#6b7280">-1</text>
+  <text x="110" y="275" font-family="sans-serif" font-size="12" fill="#6b7280">0</text>
+  <text x="175" y="275" font-family="sans-serif" font-size="12" fill="#6b7280">1</text>
+  <text x="235" y="275" font-family="sans-serif" font-size="12" fill="#6b7280">2</text>
+  <text x="295" y="275" font-family="sans-serif" font-size="12" fill="#6b7280">3</text>
+  <text x="100" y="325" font-family="sans-serif" font-size="12" fill="#6b7280">-1</text>
+  <text x="100" y="205" font-family="sans-serif" font-size="12" fill="#6b7280">1</text>
+  <text x="100" y="145" font-family="sans-serif" font-size="12" fill="#6b7280">2</text>
+  <text x="100" y="85" font-family="sans-serif" font-size="12" fill="#6b7280">3</text>
+  <line x1="180" y1="320" x2="195" y2="260" stroke="#9ca3af" stroke-width="2" stroke-dasharray="4,4" />
+  <line x1="195" y1="260" x2="225" y2="140" stroke="#2563eb" stroke-width="3" />
+  <line x1="225" y1="140" x2="240" y2="80" stroke="#9ca3af" stroke-width="2" stroke-dasharray="4,4" />
+  <circle cx="180" cy="320" r="4" fill="#ef4444" />
+  <text x="190" y="325" font-family="sans-serif" font-size="12" fill="#ef4444">A(1, -1)</text>
+  <circle cx="240" cy="80" r="4" fill="#ef4444" />
+  <text x="245" y="75" font-family="sans-serif" font-size="12" fill="#ef4444">B(2, 3)</text>
+  <circle cx="195" cy="260" r="3.5" fill="#2563eb" />
+  <text x="200" y="250" font-family="sans-serif" font-size="12" fill="#1e3a8a">P1(1.25, 0)</text>
+  <circle cx="225" cy="140" r="3.5" fill="#2563eb" />
+  <text x="155" y="145" font-family="sans-serif" font-size="12" fill="#1e3a8a">P2(1.75, 2)</text>
+  <text x="130" y="160" font-family="sans-serif" font-size="12" fill="#16a34a">Window</text>
+</svg>
+</div>
 
 **请使用 Liang-Barsky 参数化裁剪算法求出该线段在窗口内部的裁剪后端点坐标值，并写出详细的参数（$p_k, q_k, r_k$ 以及 $u_{\max}, u_{\min}$）判定与求解过程。**
