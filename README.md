@@ -21,6 +21,15 @@
 
 - 整理了一天`note\2026_review_Sonder9999.md`,大致扫了一眼ppt
 
+### 20260703
+
+- 复习整理`note\2026_review_Sonder9999.md`
+- 复习`labs\review`
+- 写`exercises\必考大题.md`
+- 写`exams\NotebookLM_A_20260703.md`
+- 写`exercises\rainclass\problem.md`
+- 写`exercises\rainclass\cg-rainclass.md`
+
 ## 开源协议 / License
 
 本项目采用 [CC BY-NC-SA 4.0 (署名-非商业性使用-相同方式共享)](LICENSE) 许可协议。
