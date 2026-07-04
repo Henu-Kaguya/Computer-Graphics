@@ -30,6 +30,10 @@
 - 写`exercises\rainclass\problem.md`
 - 写`exercises\rainclass\cg-rainclass.md`
 
+### 20260704 考试
+
+考的挺难的,特别是简答题(公式一定要记好,光照模型公式及参数那两个都考试了),大题倒不是很难,选择填空挺偏的
+
 ## 开源协议 / License
 
 本项目采用 [CC BY-NC-SA 4.0 (署名-非商业性使用-相同方式共享)](LICENSE) 许可协议。
