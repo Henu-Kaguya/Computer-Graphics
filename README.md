@@ -37,3 +37,13 @@
 ## 开源协议 / License
 
 本项目采用 [CC BY-NC-SA 4.0 (署名-非商业性使用-相同方式共享)](LICENSE) 许可协议。
+
+## 历史课件下载
+
+旧版课件已从当前 Git 主线移除，归档文件位于 [archive-2026 Release](https://github.com/Henu-Kaguya/Computer-Graphics/releases/tag/archive-2026)。ZIP 只作为 Release 资产发布，不提交回仓库。
+
+| Release 资产 | 内容 |
+|---|---|
+| `computer-graphics-legacy-slides.zip` | 历史 `slides/` 下 7 个 PDF；示例：`ch01-overview-and-display-basics.pdf`、`ch03-2d-rasterization-and-clipping.pdf`、`ch04-2d-geometric-transformations.pdf`、`ch05-3d-viewing.pdf`、`ch06-3d-modeling.pdf` 等 |
+
+`labs/`、`exercises/`、`exams/`、`note/` 中的源码、Markdown、题目和实验资源继续在 Git 中维护。历史课件归档发布前需要确认版权和再分发许可。
